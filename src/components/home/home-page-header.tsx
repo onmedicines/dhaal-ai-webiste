@@ -50,17 +50,21 @@ export default function HomePageHeader() {
       <div className="h-full">
         <div className="container mx-auto px-6 h-full flex items-center justify-between">
           {/* Logo Section */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-            transition={{ delay: isVisible ? 0.2 : 0, duration: 0.4 }}
-            className="flex items-center gap-3"
-          >
-            <Shield className="w-6 h-6 text-blue-500" />
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Dhaal AI
-            </span>
-          </motion.div>
+          <Link href="/" className="flex items-center gap-3">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={
+                isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
+              }
+              transition={{ delay: isVisible ? 0.2 : 0, duration: 0.4 }}
+              className="flex items-center gap-3"
+            >
+              <Shield className="w-6 h-6 text-blue-500" />
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Dhaal AI
+              </span>
+            </motion.div>
+          </Link>
 
           {/* Navigation Links */}
           <motion.nav

@@ -21,13 +21,14 @@ export default function Header() {
       <nav className="h-full">
         <div className="container mx-auto px-6 h-full flex items-center justify-between">
           {/* Logo Section */}
-          <div className="flex items-center gap-3">
-            <Shield className="w-6 h-6 text-blue-500" />
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Dhaal AI
-            </span>
-          </div>
-
+          <Link href="/" className="flex items-center gap-3">
+            <div className="flex items-center gap-3">
+              <Shield className="w-6 h-6 text-blue-500" />
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Dhaal AI
+              </span>
+            </div>
+          </Link>
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-8">
             {[
