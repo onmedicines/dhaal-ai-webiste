@@ -72,7 +72,6 @@ export default function HomePageHeader() {
             {[
               { label: "About", href: "/about", isExternal: true },
               { label: "Cases", href: "#cases", isExternal: false },
-              { label: "Features", href: "#features", isExternal: false },
               { label: "Protection", href: "#protection", isExternal: false },
               { label: "Articles", href: "/articles", isExternal: true },
             ].map((item) => (
