@@ -101,6 +101,7 @@ export default function ThreatCarousel() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
@@ -120,6 +121,7 @@ export default function ThreatCarousel() {
           className="flex justify-center gap-4 mb-12"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           {tabButtons.map(({ id, label }) => (
@@ -151,7 +153,7 @@ export default function ThreatCarousel() {
                 key={title}
                 variants={cardVariants}
                 whileHover={{
-                  scale: 1.05,
+                  scale: 1.01,
                   transition: { type: "spring", stiffness: 400, damping: 10 },
                 }}
                 whileTap={{ scale: 0.95 }}

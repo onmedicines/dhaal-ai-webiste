@@ -63,7 +63,10 @@ export default function ProtectionSection() {
   };
 
   return (
-    <section className="bg-gradient-to-b from-background via-secondary/10 to-background py-24 relative overflow-hidden">
+    <section
+      id="protection"
+      className="bg-gradient-to-b from-background via-secondary/10 to-background py-24 relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl"></div>
@@ -74,6 +77,7 @@ export default function ProtectionSection() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} // Add this
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
@@ -94,7 +98,7 @@ export default function ProtectionSection() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }} // Changed once: false to once: true
           className="grid md:grid-cols-2 gap-8 mb-12"
         >
           {features.map(({ title, desc, icon: Icon, gradient }) => (
@@ -102,7 +106,7 @@ export default function ProtectionSection() {
               key={title}
               variants={itemVariants}
               whileHover={{
-                scale: 1.05,
+                scale: 1.01,
                 transition: { type: "spring", stiffness: 400, damping: 10 },
               }}
               className={`p-6 rounded-xl bg-gradient-to-br ${gradient} border border-border/50 backdrop-blur-sm hover:shadow-lg transition-shadow duration-300`}
@@ -125,6 +129,7 @@ export default function ProtectionSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} // Add this
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex justify-center"
         >

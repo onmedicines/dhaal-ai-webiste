@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Shield } from "lucide-react";
+import Link from "next/link";
 
 // Animated Background Component
 const AnimatedShieldBackground = () => {
@@ -273,16 +274,12 @@ export default function HeroSection() {
           businesses and individuals stay safe from AI-generated threats.
         </p>
         <div className="flex gap-4 justify-center">
-          <Button
-            size="lg"
-            onClick={() =>
-              document
-                .getElementById("about")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+          <Link
+            href="/about"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-8"
           >
             Learn More
-          </Button>
+          </Link>
           <Button variant="outline" size="lg">
             Watch Demo
           </Button>

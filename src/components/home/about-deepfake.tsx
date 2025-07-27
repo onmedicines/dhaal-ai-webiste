@@ -1,91 +1,14 @@
-// "use client";
-
-// import { Card, CardContent, CardHeader } from "@/components/ui/card";
-// import { motion } from "framer-motion";
-
-// export default function AboutDeepfake() {
-//   return (
-//     <section id="about" className="container mx-auto px-4 py-24">
-//       <motion.div
-//         initial={{ opacity: 0 }}
-//         whileInView={{ opacity: 1 }}
-//         transition={{ duration: 0.8 }}
-//         className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto"
-//       >
-//         {/* Text Content - Left Side */}
-//         <motion.div
-//           initial={{ opacity: 0, x: 50 }}
-//           whileInView={{ opacity: 1, x: 0 }}
-//           transition={{ duration: 0.8, delay: 0.4 }}
-//         >
-//           <Card className="h-full">
-//             <CardHeader>
-//               <h2 className="text-3xl font-bold mb-4">What is a Deepfake?</h2>
-//             </CardHeader>
-//             <CardContent className="space-y-6">
-//               <p className="text-lg text-muted-foreground leading-relaxed">
-//                 A deepfake is a synthetic image, video, or audio clip generated
-//                 by AI that convincingly imitates real people. Modern models
-//                 require only a handful of photos or a short voice sample to
-//                 create near-indistinguishable forgeries.
-//               </p>
-//               <p className="text-lg text-muted-foreground leading-relaxed">
-//                 While the underlying technology powers creative applications, it
-//                 is increasingly abused for fraud, disinformation, and identity
-//                 theft—posing serious threats to businesses, individuals, and
-//                 society at large.
-//               </p>
-
-//               {/* Optional call-to-action */}
-//               {/* <div className="pt-4">
-//                 <p className="text-sm text-muted-foreground font-medium">
-//                   ← Watch the example to see how realistic these fakes can be
-//                 </p>
-//               </div> */}
-//             </CardContent>
-//           </Card>
-//         </motion.div>
-
-//         {/* Video Section - Right Side */}
-//         <motion.div
-//           initial={{ opacity: 0, x: -50 }}
-//           whileInView={{ opacity: 1, x: 0 }}
-//           transition={{ duration: 0.8, delay: 0.2 }}
-//           className="relative aspect-video w-full"
-//         >
-//           <video
-//             className="w-full h-full object-cover rounded-lg shadow-lg"
-//             controls
-//             // poster="/deepfake-demo-thumbnail.jpg" // Add a thumbnail image
-//             preload="metadata"
-//           >
-//             <source src="/deepfake-demo-video.mp4" type="video/mp4" />
-//             <source src="/deepfake-demo-video.webm" type="video/webm" />
-//             Your browser does not support the video tag.
-//           </video>
-
-//           {/* Optional overlay badge */}
-//           <div className="absolute top-4 left-4">
-//             <span className="bg-red-500/90 text-white px-3 py-1 rounded-full text-sm font-medium">
-//               Deepfake Example
-//             </span>
-//           </div>
-//         </motion.div>
-//       </motion.div>
-//     </section>
-//   );
-// }
-
 "use client";
 
 import { motion } from "framer-motion";
 
 export default function AboutDeepfake() {
   return (
-    <section id="about" className="container mx-auto px-4 py-24">
+    <section id="about-deepfake" className="container mx-auto px-4 py-24">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.8 }}
         className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto"
       >
@@ -93,6 +16,7 @@ export default function AboutDeepfake() {
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="space-y-6"
         >
@@ -123,6 +47,7 @@ export default function AboutDeepfake() {
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative aspect-video w-full"
         >

@@ -17,6 +17,7 @@ export default function CTASection() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} // Add this
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto"
         >
@@ -24,6 +25,7 @@ export default function CTASection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }} // Add this
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative p-12 rounded-2xl backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 shadow-2xl"
             style={{
@@ -40,6 +42,7 @@ export default function CTASection() {
                 className="text-4xl md:text-5xl font-bold mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} // Add this
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
                 Ready to Defend Your{" "}
@@ -53,6 +56,7 @@ export default function CTASection() {
                 className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} // Add this
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
                 Do not wait for deepfakes to target you. Start protecting
@@ -65,6 +69,7 @@ export default function CTASection() {
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} // Add this
                 transition={{ duration: 0.6, delay: 0.8 }}
                 className="pt-4"
               >
