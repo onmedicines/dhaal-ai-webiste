@@ -74,6 +74,7 @@ export default function HomePageHeader() {
               { label: "Cases", href: "#cases", isExternal: false },
               { label: "Features", href: "#features", isExternal: false },
               { label: "Protection", href: "#protection", isExternal: false },
+              { label: "Articles", href: "/articles", isExternal: true },
             ].map((item) => (
               <motion.div key={item.label} whileHover={{ scale: 1.05 }}>
                 {item.isExternal ? (
