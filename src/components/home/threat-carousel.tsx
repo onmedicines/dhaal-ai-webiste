@@ -13,6 +13,7 @@ import {
   Briefcase,
   Smartphone,
 } from "lucide-react";
+import Link from "next/link";
 
 const businessSlides = [
   {
@@ -20,18 +21,21 @@ const businessSlides = [
     desc: "Criminals create fake audio of company executives to authorize fraudulent money transfers, causing millions in losses.",
     icon: Users,
     gradient: "from-red-500/20 to-orange-500/20",
+    href: "/articles/voice-cloning-fraud-silent-threat",
   },
   {
     title: "Brand Damage",
     desc: "Fake videos showing false product recalls or negative statements destroy customer trust and company reputation.",
     icon: TrendingDown,
     gradient: "from-orange-500/20 to-yellow-500/20",
+    href: "/articles/brand-damage-deepfake-era",
   },
   {
     title: "Market Manipulation",
     desc: "False videos of executives making fake announcements are used to artificially move stock prices up or down.",
     icon: DollarSign,
     gradient: "from-yellow-500/20 to-red-500/20",
+    href: "/articles/market-manipulation-deepfake-financial-warfare",
   },
 ];
 
@@ -41,18 +45,21 @@ const individualSlides = [
     desc: "Someone's face is digitally swapped into inappropriate content without consent, causing emotional trauma.",
     icon: Heart,
     gradient: "from-blue-500/20 to-cyan-500/20",
+    href: "/articles/personal-image-abuse-deepfake-technology",
   },
   {
     title: "Fake Job Interviews",
     desc: "Scammers create fake video interviews with made-up recruiters to steal personal information and money.",
     icon: Briefcase,
     gradient: "from-cyan-500/20 to-blue-500/20",
+    href: "/articles/fake-job-interviews-deepfake-recruiters",
   },
   {
     title: "Social Media Lies",
     desc: "Fake videos make it appear someone said or did things they never did, ruining their reputation online.",
     icon: Smartphone,
     gradient: "from-purple-500/20 to-blue-500/20",
+    href: "/articles/social-media-lies-deepfake-reputation-destruction",
   },
 ];
 
@@ -148,37 +155,38 @@ export default function ThreatCarousel() {
             exit={{ opacity: 0, y: -20 }}
             className="grid md:grid-cols-3 gap-8"
           >
-            {slides.map(({ title, desc, icon: Icon, gradient }) => (
-              <motion.div
-                key={title}
-                variants={cardVariants}
-                whileHover={{
-                  scale: 1.01,
-                  transition: { type: "spring", stiffness: 400, damping: 10 },
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Card
-                  className={cn(
-                    "h-full bg-gradient-to-br border-0 shadow-lg hover:shadow-xl transition-shadow duration-300",
-                    gradient,
-                  )}
+            {slides.map(({ title, desc, icon: Icon, gradient, href }) => (
+              <Link key={title} href={href}>
+                <motion.div
+                  variants={cardVariants}
+                  whileHover={{
+                    scale: 1.01,
+                    transition: { type: "spring", stiffness: 400, damping: 10 },
+                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-white/10 backdrop-blur-sm rounded-full">
-                      <Icon size={32} className="text-foreground" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-center">
-                      {title}
-                    </h3>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed text-center">
-                      {desc}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                  <Card
+                    className={cn(
+                      "h-full bg-gradient-to-br border-0 shadow-lg hover:shadow-xl transition-shadow duration-300",
+                      gradient,
+                    )}
+                  >
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-white/10 backdrop-blur-sm rounded-full">
+                        <Icon size={32} className="text-foreground" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-center">
+                        {title}
+                      </h3>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground leading-relaxed text-center">
+                        {desc}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </Link>
             ))}
           </motion.div>
         </AnimatePresence>
