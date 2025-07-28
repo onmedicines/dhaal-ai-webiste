@@ -5,8 +5,10 @@ import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function HomePageHeader() {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const { scrollY } = useScroll();
 
@@ -108,7 +110,7 @@ export default function HomePageHeader() {
             <Button
               size="sm"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-lg"
-              onClick={() => alert("Get started coming soon!")}
+              onClick={() => router.push("/dashboard")}
             >
               Get Started
             </Button>
