@@ -31,6 +31,8 @@ export default function LoginPage() {
       );
 
       if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("authToken", data.data.token);
         router.push("/dashboard");
       } else {
         // Try to get error message from the backend, else fallback
