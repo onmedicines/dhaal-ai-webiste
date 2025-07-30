@@ -225,10 +225,3 @@ export default function ArticlePage({ params }: Props) {
     </>
   );
 }
-
-// Generate static params for better performance
-// export async function generateStaticParams() {
-//   return articles.map((article) => ({
-//     slug: article.slug,
-//   }));
-// }

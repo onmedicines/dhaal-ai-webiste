@@ -5,6 +5,7 @@ import RealCasesSection from "@/components/home/real-cases";
 import ProtectionSection from "@/components/home/protection";
 import CTASection from "@/components/home/cta";
 import HomePageHeader from "@/components/home/home-page-header";
+import Footer from "@/components/global/footer";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <RealCasesSection />
       <ProtectionSection />
       <CTASection />
+      <Footer />
     </>
   );
 }
