@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import { motion } from "framer-motion";
 import { articles } from "@/data/articles";
 import { notFound } from "next/navigation";
@@ -8,11 +9,12 @@ import Link from "next/link";
 import Header from "@/components/global/header";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default function ArticlePage({ params }: Props) {
-  const article = articles.find((a) => a.slug === params.slug);
+  const { slug } = use(params);
+  const article = articles.find((a) => a.slug === slug);
 
   if (!article) {
     notFound();
@@ -143,7 +145,7 @@ export default function ArticlePage({ params }: Props) {
                 {/* Previous Article */}
                 {(() => {
                   const currentIndex = articles.findIndex(
-                    (a) => a.slug === params.slug,
+                    (a) => a.slug === slug,
                   );
                   const prevArticle = articles[currentIndex - 1];
                   return prevArticle ? (
@@ -166,7 +168,7 @@ export default function ArticlePage({ params }: Props) {
                 {/* Next Article */}
                 {(() => {
                   const currentIndex = articles.findIndex(
-                    (a) => a.slug === params.slug,
+                    (a) => a.slug === slug,
                   );
                   const nextArticle = articles[currentIndex + 1];
                   return nextArticle ? (
