@@ -47,13 +47,17 @@ export default function Topbar({ user }: TopbarProps) {
 
           {/* User Profile */}
           <div className="flex items-center space-x-3">
-            <Image
-              src={user.avatarUrl || "/default-avatar.png"}
-              alt="Profile"
-              width={32}
-              height={32}
-              className="rounded-full object-cover"
-            />
+            {user.avatarUrl ? (
+              <Image
+                src={user.avatarUrl}
+                alt="Profile"
+                width={32}
+                height={32}
+                className="rounded-full object-cover"
+              />
+            ) : (
+              <User className="h-5 w-5" />
+            )}
             <div className="hidden sm:block">
               <p className="text-sm font-medium text-foreground">{user.name}</p>
               <p className="text-xs text-muted-foreground capitalize">

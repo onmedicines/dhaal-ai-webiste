@@ -29,22 +29,22 @@ export default function DashboardLayout({
     if (!token) {
       router.replace("/login");
     } else {
-      // TODO: Replace this with real user fetch/decode logic
-      // Simulate fetching user info based on token
-      const storedUser = localStorage.getItem("user"); // for example
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      } else {
-        // fallback or fetch from API instead
-        setUser({
-          name: "John Doe",
-          email: "john.doe@example.com",
-          role: "individual", // or "business"
-          avatarUrl: "https://i.pravatar.cc/150?img=12",
-        });
-      }
-      setIsLoading(false);
+      const user = async () => {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        const data = await response.json();
+        console.log(data);
+        setUser(data.data.user);
+      };
+      user();
     }
+    setIsLoading(false);
   }, [router]);
 
   if (isLoading) {
@@ -56,12 +56,22 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-muted/40">
-      {user.role === "individual" && <SidebarIndividual user={user} />}
-      {user.role === "business" && <SidebarBusiness user={user} />}
-      <div className="flex-1 flex flex-col">
-        <Topbar user={user} />
-        <main className="flex-1 p-4">{children}</main>
+    <div className="flex h-screen bg-muted/40 overflow-hidden">
+      {/* Fixed Sidebar */}
+      <div className="flex-shrink-0">
+        {user.role === "individual" && <SidebarIndividual user={user} />}
+        {user.role === "business" && <SidebarBusiness user={user} />}
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Fixed Topbar */}
+        <div className="flex-shrink-0">
+          <Topbar user={user} />
+        </div>
+
+        {/* Scrollable Content */}
+        <main className="flex-1 overflow-y-auto p-4">{children}</main>
       </div>
     </div>
   );

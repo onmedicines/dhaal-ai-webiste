@@ -5,19 +5,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import {
-  Building2,
-  Users,
-  BellRing,
+  BarChart3,
+  Search,
+  Lock,
+  Shield,
+  Eye,
+  DollarSign,
   FileText,
-  ShieldCheck,
-  CreditCard,
-  LifeBuoy,
-  Settings,
+  TrendingUp,
+  ImageIcon,
+  Video,
+  Mic,
+  FileSearch,
+  Phone,
+  LinkIcon,
   Menu,
   ChevronLeft,
-  UserCog,
-  BarChart3,
+  ChevronDown,
+  User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -34,45 +41,78 @@ interface SidebarProps {
   user: User;
 }
 
-const navItems = [
-  { name: "Overview", href: "/dashboard/overview", icon: Building2 },
-  { name: "Assets Management", href: "/dashboard/assets", icon: FileText },
-  { name: "Alerts & Incidents", href: "/dashboard/alerts", icon: BellRing },
-  { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
-  {
-    name: "Insurance Policies",
-    href: "/dashboard/insurance",
-    icon: ShieldCheck,
-  },
-  { name: "Team & Roles", href: "/dashboard/team", icon: Users },
-  { name: "Admin Tools", href: "/dashboard/admin", icon: UserCog },
-  { name: "Subscription", href: "/dashboard/subscription", icon: CreditCard },
-  { name: "Help & Support", href: "/dashboard/support", icon: LifeBuoy },
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
+const mainNavItems = [
+  { name: "Dashboard", href: "/dashboard", icon: BarChart3 },
 ];
 
-export default function SidebarBusiness({ user }: SidebarProps) {
+const securityPlugins = [
+  { name: "Threat Analysis", href: "/dashboard/threat-analysis", icon: Search },
+  { name: "Penetration", href: "/dashboard/penetration", icon: Lock },
+  { name: "Security Check", href: "/dashboard/security-check", icon: Shield },
+  { name: "Overview Data", href: "/dashboard/overview-data", icon: Eye },
+];
+
+const otherItems = [
+  {
+    name: "Wealth Analyzer",
+    href: "/dashboard/wealth-analyzer",
+    icon: DollarSign,
+  },
+  { name: "Plan Details", href: "/dashboard/plan-details", icon: FileText },
+  { name: "Analytics", href: "/dashboard/analytics", icon: TrendingUp },
+];
+
+const sdkApiProviders = [
+  {
+    name: "Image Detection",
+    href: "/dashboard/image-detection",
+    icon: ImageIcon,
+  },
+  { name: "Video Detection", href: "/dashboard/video-detection", icon: Video },
+  { name: "Audio Detection", href: "/dashboard/audio-detection", icon: Mic },
+  { name: "Text Analysis", href: "/dashboard/text-analysis", icon: FileSearch },
+  { name: "Call Analysis", href: "/dashboard/call-analysis", icon: Phone },
+  { name: "URL Scanning", href: "/dashboard/url-scanning", icon: LinkIcon },
+];
+
+export default function SidebarIndividual({ user }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
+  const [securityExpanded, setSecurityExpanded] = useState(true);
+  const [sdkExpanded, setSdkExpanded] = useState(true);
   const pathname = usePathname();
 
   return (
-    <aside
-      className={cn(
-        "bg-card border-r border-border h-screen flex flex-col transition-all duration-300",
-        collapsed ? "w-16" : "w-64",
-      )}
+    <motion.aside
+      animate={{
+        width: collapsed ? "4rem" : "16rem",
+      }}
+      transition={{
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1],
+      }}
+      className="bg-card border-r border-border h-full flex flex-col"
     >
-      {/* Header with User Info */}
-      <div className="flex items-center justify-between p-4 border-b border-border">
+      {/* Header with User Info - Fixed */}
+      <div className="flex items-center justify-between p-4 border-b border-border flex-shrink-0">
         {!collapsed && (
-          <div className="flex items-center space-x-3">
-            <Image
-              src={user.avatarUrl || "/default-avatar.png"}
-              alt="Avatar"
-              width={40}
-              height={40}
-              className="rounded-full object-cover"
-            />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, delay: 0.3 }}
+            className="flex items-center space-x-3"
+          >
+            {user.avatarUrl ? (
+              <Image
+                src={user.avatarUrl || "/default-avatar.png"}
+                alt="Avatar"
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
+            ) : (
+              <User className="h-10 w-10 p-2 bg-muted rounded-full" />
+            )}
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-foreground truncate text-sm">
                 {user.name}
@@ -80,11 +120,11 @@ export default function SidebarBusiness({ user }: SidebarProps) {
               <p className="text-xs text-muted-foreground truncate">
                 {user.email}
               </p>
-              <Badge variant="outline" className="text-xs mt-1">
-                Business
+              <Badge variant="secondary" className="text-xs mt-1">
+                Individual
               </Badge>
             </div>
-          </div>
+          </motion.div>
         )}
         <Button
           variant="ghost"
@@ -99,13 +139,14 @@ export default function SidebarBusiness({ user }: SidebarProps) {
         </Button>
       </div>
 
-      {/* Navigation */}
+      {/* Navigation - Scrollable */}
       <nav className="flex-1 overflow-y-auto py-4">
-        <ul className="space-y-1 px-3">
-          {navItems.map(({ name, href, icon: Icon }) => {
+        <div className="space-y-1 px-3">
+          {/* Main Dashboard */}
+          {mainNavItems.map(({ name, href, icon: Icon }) => {
             const isActive = pathname === href;
             return (
-              <li key={name}>
+              <div key={name}>
                 <Link
                   href={href}
                   className={cn(
@@ -116,25 +157,190 @@ export default function SidebarBusiness({ user }: SidebarProps) {
                   )}
                 >
                   <Icon className="h-5 w-5 flex-shrink-0" />
-                  {!collapsed && <span>{name}</span>}
+                  {!collapsed && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2, delay: 0.3 }}
+                    >
+                      {name}
+                    </motion.span>
+                  )}
                 </Link>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
+
+        {/* Security Plugins Section */}
+        <div className="mt-6">
+          {!collapsed && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, delay: 0.3 }}
+              className="px-3 mb-2"
+            >
+              <button
+                onClick={() => setSecurityExpanded(!securityExpanded)}
+                className="flex items-center justify-between w-full text-xs font-semibold text-muted-foreground uppercase tracking-wider"
+              >
+                Security Plugins
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform",
+                    !securityExpanded && "-rotate-90",
+                  )}
+                />
+              </button>
+            </motion.div>
+          )}
+
+          {(securityExpanded || collapsed) && (
+            <div className="space-y-1 px-3">
+              {securityPlugins.map(({ name, href, icon: Icon }) => {
+                const isActive = pathname === href;
+                return (
+                  <div key={name}>
+                    <Link
+                      href={href}
+                      className={cn(
+                        "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                        "hover:bg-accent hover:text-accent-foreground",
+                        isActive && "bg-accent text-accent-foreground",
+                        collapsed && "justify-center",
+                      )}
+                    >
+                      <Icon className="h-5 w-5 flex-shrink-0" />
+                      {!collapsed && (
+                        <motion.span
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2, delay: 0.3 }}
+                        >
+                          {name}
+                        </motion.span>
+                      )}
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Other Items */}
+        <div className="mt-6 space-y-1 px-3">
+          {otherItems.map(({ name, href, icon: Icon }) => {
+            const isActive = pathname === href;
+            return (
+              <div key={name}>
+                <Link
+                  href={href}
+                  className={cn(
+                    "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                    "hover:bg-accent hover:text-accent-foreground",
+                    isActive && "bg-accent text-accent-foreground",
+                    collapsed && "justify-center",
+                  )}
+                >
+                  <Icon className="h-5 w-5 flex-shrink-0" />
+                  {!collapsed && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2, delay: 0.3 }}
+                    >
+                      {name}
+                    </motion.span>
+                  )}
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* SDK & API Providers Section */}
+        <div className="mt-6">
+          {!collapsed && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, delay: 0.3 }}
+              className="px-3 mb-2"
+            >
+              <button
+                onClick={() => setSdkExpanded(!sdkExpanded)}
+                className="flex items-center justify-between w-full text-xs font-semibold text-muted-foreground uppercase tracking-wider"
+              >
+                SDK & API Providers
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform",
+                    !sdkExpanded && "-rotate-90",
+                  )}
+                />
+              </button>
+            </motion.div>
+          )}
+
+          {(sdkExpanded || collapsed) && (
+            <div className="space-y-1 px-3">
+              {sdkApiProviders.map(({ name, href, icon: Icon }) => {
+                const isActive = pathname === href;
+                return (
+                  <div key={name}>
+                    <Link
+                      href={href}
+                      className={cn(
+                        "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                        "hover:bg-accent hover:text-accent-foreground",
+                        isActive && "bg-accent text-accent-foreground",
+                        collapsed && "justify-center",
+                      )}
+                    >
+                      <Icon className="h-5 w-5 flex-shrink-0" />
+                      {!collapsed && (
+                        <motion.span
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2, delay: 0.3 }}
+                        >
+                          {name}
+                        </motion.span>
+                      )}
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
       </nav>
 
-      {/* Detection Count Footer */}
+      {/* Detection Count Footer - Fixed */}
       {!collapsed && (
-        <div className="p-4 border-t border-border">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2, delay: 0.3 }}
+          className="p-4 border-t border-border flex-shrink-0"
+        >
           <div className="text-center">
             <p className="text-lg font-semibold text-foreground">
               {user.detectionsCount || 0}
             </p>
             <p className="text-xs text-muted-foreground">Total Detections</p>
           </div>
-        </div>
+        </motion.div>
       )}
-    </aside>
+    </motion.aside>
   );
 }
