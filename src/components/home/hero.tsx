@@ -8,118 +8,158 @@ import Link from "next/link";
 
 // Animated Background Component
 const AnimatedShieldBackground = () => {
-  // Define line paths - scaled down to be smaller relative to shield
+  // Define line paths - expanded to cover full viewport
   const lines = [
-    // Top lines
+    // Top area lines
     {
       startX: 0,
-      startY: -72, // was -120
+      startY: -200,
       midX: 0,
-      midY: -132, // was -220
-      endX: -72, // was -120
-      endY: -132, // was -220
+      midY: -400,
+      endX: -300,
+      endY: -400,
       delay: 0,
     },
     {
       startX: 0,
-      startY: -72, // was -120
+      startY: -200,
       midX: 0,
-      midY: -168, // was -280
-      endX: 90, // was 150
-      endY: -168, // was -280
+      midY: -450,
+      endX: 350,
+      endY: -450,
       delay: 0.3,
     },
 
-    // Right lines
+    // Right area lines
     {
-      startX: 48, // was 80
-      startY: -18, // was -30
-      midX: 120, // was 200
-      midY: -18, // was -30
-      endX: 120, // was 200
-      endY: -90, // was -150
+      startX: 150,
+      startY: -50,
+      midX: 400,
+      midY: -50,
+      endX: 400,
+      endY: -250,
       delay: 0.6,
     },
     {
-      startX: 48, // was 80
-      startY: 24, // was 40
-      midX: 150, // was 250
-      midY: 24, // was 40
-      endX: 150, // was 250
-      endY: 84, // was 140
+      startX: 150,
+      startY: 80,
+      midX: 450,
+      midY: 80,
+      endX: 450,
+      endY: 300,
       delay: 0.9,
     },
 
-    // Bottom lines
+    // Bottom area lines
     {
       startX: 0,
-      startY: 72, // was 120
+      startY: 200,
       midX: 0,
-      midY: 132, // was 220
-      endX: -78, // was -130
-      endY: 132, // was 220
+      midY: 400,
+      endX: -350,
+      endY: 400,
       delay: 1.2,
     },
     {
       startX: 0,
-      startY: 72, // was 120
+      startY: 200,
       midX: 0,
-      midY: 168, // was 280
-      endX: 96, // was 160
-      endY: 168, // was 280
+      midY: 450,
+      endX: 320,
+      endY: 450,
       delay: 1.5,
     },
 
-    // Left lines
+    // Left area lines
     {
-      startX: -48, // was -80
-      startY: -18, // was -30
-      midX: -120, // was -200
-      midY: -18, // was -30
-      endX: -120, // was -200
-      endY: -84, // was -140
+      startX: -150,
+      startY: -50,
+      midX: -400,
+      midY: -50,
+      endX: -400,
+      endY: -280,
       delay: 1.8,
     },
     {
-      startX: -48, // was -80
-      startY: 30, // was 50
-      midX: -144, // was -240
-      midY: 30, // was 50
-      endX: -144, // was -240
-      endY: 102, // was 170
+      startX: -150,
+      startY: 100,
+      midX: -450,
+      midY: 100,
+      endX: -450,
+      endY: 320,
       delay: 2.1,
     },
 
-    // Additional diagonal lines for more coverage
+    // Diagonal spanning lines
     {
-      startX: 36, // was 60
-      startY: -36, // was -60
-      midX: 108, // was 180
-      midY: -108, // was -180
-      endX: 168, // was 280
-      endY: -108, // was -180
+      startX: 120,
+      startY: -120,
+      midX: 300,
+      midY: -300,
+      endX: 500,
+      endY: -300,
       delay: 2.4,
     },
     {
-      startX: -36, // was -60
-      startY: 36, // was 60
-      midX: -108, // was -180
-      midY: 108, // was 180
-      endX: -168, // was -280
-      endY: 108, // was 180
+      startX: -120,
+      startY: 120,
+      midX: -300,
+      midY: 300,
+      endX: -500,
+      endY: 300,
       delay: 2.7,
+    },
+
+    // Additional cross-viewport lines
+    {
+      startX: -200,
+      startY: -200,
+      midX: -400,
+      midY: -400,
+      endX: -400,
+      endY: -200,
+      delay: 3.0,
+    },
+    {
+      startX: 200,
+      startY: 200,
+      midX: 400,
+      midY: 400,
+      endX: 400,
+      endY: 200,
+      delay: 3.3,
+    },
+
+    // Long spanning horizontal lines
+    {
+      startX: -100,
+      startY: 0,
+      midX: -500,
+      midY: 0,
+      endX: -500,
+      endY: 150,
+      delay: 3.6,
+    },
+    {
+      startX: 100,
+      startY: 0,
+      midX: 500,
+      midY: 0,
+      endX: 500,
+      endY: -150,
+      delay: 3.9,
     },
   ];
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-15 dark:opacity-25">
-      <div className="relative scale-150">
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-25 dark:opacity-35">
+      <div className="relative">
         {/* Central Shield - Made larger */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{
             scale: [0, 1.3, 1],
-            opacity: [0, 0.8, 1],
+            opacity: [0, 0.9, 1],
           }}
           transition={{
             duration: 1.5,
@@ -128,28 +168,29 @@ const AnimatedShieldBackground = () => {
           className="relative z-10"
         >
           <Shield
-            size={150}
+            size={180}
             className="text-blue-500 drop-shadow-lg"
             fill="currentColor"
           />
         </motion.div>
 
-        {/* Animated Circuit Lines - Properly centered SVG */}
+        {/* Animated Circuit Lines - Full viewport coverage */}
         <svg
           className="absolute"
           style={{
-            width: "400px", // Reduced from 800px
-            height: "400px", // Reduced from 800px
-            left: "50%", // Center horizontally
-            top: "50%", // Center vertically
-            transform: "translate(-50%, -50%)", // Perfect centering
+            width: "100vw",
+            height: "100vh",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
           }}
-          viewBox="-200 -200 400 400" // Reduced from -400 -400 800 800
+          viewBox="-800 -500 1600 1000" // Expanded width from 1200 to 1600 for longer horizontal lines
         >
           <defs>
             <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#3b82f6" stopOpacity="1" />
-              <stop offset="100%" stopColor="#8b5cf6" stopOpacity="1" />
+              <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#06b6d4" stopOpacity="1" />
             </linearGradient>
             <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#a855f7" stopOpacity="1" />
@@ -159,86 +200,159 @@ const AnimatedShieldBackground = () => {
 
           {lines.map((line, index) => (
             <g key={index}>
-              {/* Line Path */}
+              {/* Line Path - Made brighter */}
               <motion.path
                 d={`M ${line.startX} ${line.startY} L ${line.midX} ${line.midY} L ${line.endX} ${line.endY}`}
                 fill="none"
                 stroke="url(#lineGradient)"
-                strokeWidth="3" // Reduced from 4
+                strokeWidth="3"
                 strokeLinecap="round"
+                strokeDasharray="5,5"
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{
                   pathLength: [0, 1],
-                  opacity: [0, 1],
+                  opacity: [0, 0.9, 0.7],
                 }}
                 transition={{
-                  duration: 2.5,
+                  duration: 3,
                   delay: line.delay,
                   ease: "easeInOut",
                 }}
               />
 
-              {/* End Node */}
+              {/* End Node - Made brighter */}
               <motion.circle
                 cx={line.endX}
                 cy={line.endY}
-                r="6" // Reduced from 8
+                r="5"
                 fill="url(#nodeGradient)"
                 stroke="#3b82f6"
-                strokeWidth="2" // Reduced from 3
+                strokeWidth="2"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{
-                  scale: [0, 1.4, 1],
-                  opacity: [0, 1, 1],
+                  scale: [0, 1.5, 1],
+                  opacity: [0, 1, 0.9],
                 }}
                 transition={{
-                  duration: 0.6,
-                  delay: line.delay + 2,
+                  duration: 0.8,
+                  delay: line.delay + 2.5,
                   ease: "easeOut",
                 }}
               />
 
-              {/* Pulsing effect on nodes */}
+              {/* Pulsing effect on nodes - Made brighter */}
               <motion.circle
                 cx={line.endX}
                 cy={line.endY}
-                r="6" // Reduced from 8
-                fill="url(#nodeGradient)"
+                r="5"
+                fill="none"
+                stroke="url(#nodeGradient)"
+                strokeWidth="2"
                 initial={{ scale: 1, opacity: 0.8 }}
                 animate={{
-                  scale: [1, 1.6, 1],
+                  scale: [1, 2.5, 1],
                   opacity: [0.8, 0.2, 0.8],
                 }}
                 transition={{
-                  duration: 2.5,
-                  delay: line.delay + 3,
+                  duration: 3,
+                  delay: line.delay + 4,
                   repeat: Infinity,
                   repeatType: "loop",
                 }}
               />
             </g>
           ))}
+
+          {/* Additional ambient lines that span across the viewport - Made much longer horizontally */}
+          <motion.path
+            d="M -800 -200 L 800 -200"
+            fill="none"
+            stroke="url(#lineGradient)"
+            strokeWidth="2"
+            strokeOpacity="0.6"
+            strokeDasharray="10,10"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 4, delay: 1 }}
+          />
+          <motion.path
+            d="M -800 200 L 800 200"
+            fill="none"
+            stroke="url(#lineGradient)"
+            strokeWidth="2"
+            strokeOpacity="0.6"
+            strokeDasharray="10,10"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 4, delay: 1.5 }}
+          />
+          <motion.path
+            d="M -300 -500 L -300 500"
+            fill="none"
+            stroke="url(#lineGradient)"
+            strokeWidth="2"
+            strokeOpacity="0.6"
+            strokeDasharray="10,10"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 4, delay: 2 }}
+          />
+          <motion.path
+            d="M 300 -500 L 300 500"
+            fill="none"
+            stroke="url(#lineGradient)"
+            strokeWidth="2"
+            strokeOpacity="0.6"
+            strokeDasharray="10,10"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 4, delay: 2.5 }}
+          />
+
+          {/* Additional long horizontal lines for better coverage */}
+          <motion.path
+            d="M -750 -100 L 750 -100"
+            fill="none"
+            stroke="url(#lineGradient)"
+            strokeWidth="1"
+            strokeOpacity="0.4"
+            strokeDasharray="15,15"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 5, delay: 3 }}
+          />
+          <motion.path
+            d="M -750 100 L 750 100"
+            fill="none"
+            stroke="url(#lineGradient)"
+            strokeWidth="1"
+            strokeOpacity="0.4"
+            strokeDasharray="15,15"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 5, delay: 3.5 }}
+          />
         </svg>
 
-        {/* More floating particles scattered across smaller area */}
-        {[...Array(12)].map((_, i) => (
+        {/* Floating particles spread across larger area - Made brighter */}
+        {[...Array(18)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-blue-400 rounded-full" // Reduced from w-3 h-3
+            className="absolute w-2 h-2 bg-blue-400/80 rounded-full"
             style={{
-              left: Math.random() * 300 - 150, // Reduced from 600 - 300
-              top: Math.random() * 300 - 150, // Reduced from 600 - 300
+              left: (Math.random() - 0.5) * 1200, // Increased horizontal spread to match new viewBox
+              top: (Math.random() - 0.5) * 800,
             }}
             animate={{
-              y: [0, -20, 0], // Reduced from -30
-              x: [0, Math.random() * 15 - 7.5, 0], // Reduced from 20 - 10
-              opacity: [0.2, 0.7, 0.2],
-              scale: [0.5, 1.0, 0.5], // Reduced from 1.2
+              y: [0, -30, 0],
+              x: [0, Math.random() * 20 - 10, 0],
+              opacity: [0.3, 0.8, 0.3],
+              scale: [0.5, 1.2, 0.5],
             }}
             transition={{
-              duration: 4 + Math.random() * 3,
+              duration: 5 + Math.random() * 3,
               repeat: Infinity,
-              delay: Math.random() * 3,
+              delay: Math.random() * 4,
             }}
           />
         ))}
