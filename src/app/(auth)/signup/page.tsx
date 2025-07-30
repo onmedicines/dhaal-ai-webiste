@@ -59,7 +59,8 @@ export default function SignupPage() {
       );
 
       if (!response.ok) {
-        console.log(response);
+        const data = await response.json();
+        localStorage.setItem("authToken", data.data.token);
         throw new Error("Couldn't register user. Try again later.");
       }
 
