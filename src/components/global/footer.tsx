@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Shield, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import DhaalAndName from "../logo/dhaalandname";
 
 export default function Footer() {
   return (
@@ -16,10 +17,11 @@ export default function Footer() {
               transition={{ duration: 0.6 }}
               className="flex items-center gap-3 mb-4"
             >
-              <Shield className="w-8 h-8 text-slate-700 dark:text-slate-300" />
+              {/* <Shield className="w-8 h-8 text-slate-700 dark:text-slate-300" />
               <span className="text-2xl font-bold text-slate-800 dark:text-slate-200">
                 Dhaal AI
-              </span>
+              </span> */}
+              <DhaalAndName size="lg" />
             </motion.div>
             <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               Advanced AI-powered deepfake detection technology protecting
@@ -105,17 +107,17 @@ export default function Footer() {
         <div className="border-t border-gray-200 dark:border-slate-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex flex-wrap gap-6">
             {[
-              "Privacy Policy",
-              "Terms of Service",
-              "Cookie Policy",
-              "GDPR Compliance",
+              { name: "Privacy Policy", href: "/privacy_policy" },
+              { name: "Terms of Service", href: "/t&c" },
+              { name: "Cookie Policy", href: "/cookie-policy" },
+              { name: "GDPR Compliance", href: "/gdpr-compliance" },
             ].map((item) => (
               <a
-                key={item}
-                href="#"
+                key={item.name}
+                href={item.href}
                 className="text-slate-500 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 text-sm transition-colors duration-200"
               >
-                {item}
+                {item.name}
               </a>
             ))}
           </div>

@@ -1,11 +1,11 @@
 "use client";
 
 import { motion, useScroll } from "framer-motion";
-import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import DhaalAndName from "../logo/dhaalandname";
 
 export default function HomePageHeader() {
   const router = useRouter();
@@ -61,10 +61,7 @@ export default function HomePageHeader() {
               transition={{ delay: isVisible ? 0.2 : 0, duration: 0.4 }}
               className="flex items-center gap-3"
             >
-              <Shield className="w-6 h-6 text-blue-500" />
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Dhaal AI
-              </span>
+              <DhaalAndName size="sm" />
             </motion.div>
           </Link>
 
