@@ -15,9 +15,9 @@ import {
   DollarSign,
   FileText,
   TrendingUp,
-  ImageIcon,
-  Video,
-  Mic,
+  // ImageIcon,
+  // Video,
+  // Mic,
   FileSearch,
   Phone,
   LinkIcon,
@@ -63,13 +63,13 @@ const otherItems = [
 ];
 
 const sdkApiProviders = [
-  {
-    name: "Image Detection",
-    href: "/dashboard/image-detection",
-    icon: ImageIcon,
-  },
-  { name: "Video Detection", href: "/dashboard/video-detection", icon: Video },
-  { name: "Audio Detection", href: "/dashboard/audio-detection", icon: Mic },
+  // {
+  //   name: "Image Detection",
+  //   href: "/dashboard/image-detection",
+  //   icon: ImageIcon,
+  // },
+  // { name: "Video Detection", href: "/dashboard/video-detection", icon: Video },
+  // { name: "Audio Detection", href: "/dashboard/audio-detection", icon: Mic },
   { name: "Text Analysis", href: "/dashboard/text-analysis", icon: FileSearch },
   { name: "Call Analysis", href: "/dashboard/call-analysis", icon: Phone },
   { name: "URL Scanning", href: "/dashboard/url-scanning", icon: LinkIcon },
