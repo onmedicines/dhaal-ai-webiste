@@ -84,19 +84,19 @@ export default function Footer() {
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-slate-500 dark:text-slate-500" />
                 <span className="text-slate-600 dark:text-slate-400 text-sm">
-                  hello@dhaal.ai
+                  support@dhaal.io
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-slate-500 dark:text-slate-500" />
                 <span className="text-slate-600 dark:text-slate-400 text-sm">
-                  +1 (555) 123-4567
+                  +91 9250696982
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-4 h-4 text-slate-500 dark:text-slate-500" />
                 <span className="text-slate-600 dark:text-slate-400 text-sm">
-                  San Francisco, CA
+                  Lucknow, Uttar Pradesh, India
                 </span>
               </div>
             </div>
