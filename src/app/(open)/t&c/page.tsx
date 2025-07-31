@@ -263,7 +263,7 @@ export default function TermsPage() {
             <Link href="/">Back to Home</Link>
           </Button>
           <Button asChild variant="link" size="lg">
-            <Link href="/privacy-policy">Read Privacy Policy</Link>
+            <Link href="/privacy_policy">Read Privacy Policy</Link>
           </Button>
         </div>
       </main>
