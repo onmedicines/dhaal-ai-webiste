@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Shield } from "lucide-react";
+// import { Shield } from "lucide-react";
+import DhaalLogo from "@/components/logo/dhaal";
 import Link from "next/link";
 
 // Animated Background Component
@@ -167,11 +168,12 @@ const AnimatedShieldBackground = () => {
           }}
           className="relative z-10"
         >
-          <Shield
+          {/* <Shield
             size={180}
             className="text-blue-500 drop-shadow-lg"
             fill="currentColor"
-          />
+          /> */}
+          <DhaalLogo size={180} />
         </motion.div>
 
         {/* Animated Circuit Lines - Full viewport coverage */}
