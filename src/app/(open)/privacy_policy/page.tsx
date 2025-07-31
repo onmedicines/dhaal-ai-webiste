@@ -47,7 +47,7 @@ export default function PrivacyPolicyPage() {
             Dhaal.AI Privacy Policy
           </motion.h1>
           <div className="text-muted-foreground text-lg text-center max-w-xl">
-            Effective Date: July 31, 2025
+            Effective Date: March 20, 2025
           </div>
         </section>
 
