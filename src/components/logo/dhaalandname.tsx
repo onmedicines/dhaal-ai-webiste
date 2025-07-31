@@ -391,8 +391,8 @@ export default function DhaalAndName({ size }: { size: "lg" | "sm" }) {
             y2="616.999"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#000246" />
-            <stop offset="1" stop-color="#087A87" />
+            <stop stopColor="#000246" />
+            <stop offset="1" stopColor="#087A87" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_1197_1261"
@@ -402,8 +402,8 @@ export default function DhaalAndName({ size }: { size: "lg" | "sm" }) {
             y2="384.421"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#000246" />
-            <stop offset="1" stop-color="#087A87" />
+            <stop stopColor="#000246" />
+            <stop offset="1" stopColor="#087A87" />
           </linearGradient>
           <image
             id="image0_1197_1261"
