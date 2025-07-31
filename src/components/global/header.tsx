@@ -1,9 +1,10 @@
 "use client";
 
-import { Shield } from "lucide-react";
+// import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import DhaalAndName from "../logo/dhaalandname";
 
 export default function Header() {
   const router = useRouter();
@@ -26,10 +27,7 @@ export default function Header() {
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-3">
             <div className="flex items-center gap-3">
-              <Shield className="w-6 h-6 text-blue-500" />
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Dhaal AI
-              </span>
+              <DhaalAndName size="sm" />
             </div>
           </Link>
           {/* Navigation Links */}

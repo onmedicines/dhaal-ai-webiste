@@ -65,7 +65,7 @@ export default function ArticlesPage() {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Stay informed about the latest developments in AI, deepfake
               detection, and digital security with expert insights from the
-              Dhaal AI team.
+              Dhaal IO team.
             </p>
           </motion.div>
 

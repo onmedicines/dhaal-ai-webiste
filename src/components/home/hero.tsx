@@ -382,7 +382,7 @@ export default function HeroSection() {
         <h1 className="text-6xl md:text-8xl font-extrabold leading-tight mb-8">
           Shield Your Reality with{" "}
           <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Dhaal AI
+            Dhaal IO
           </span>
         </h1>
         <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">

@@ -21,7 +21,7 @@ export default function LearnMorePage() {
               <h1 className="text-5xl md:text-7xl font-extrabold mb-6">
                 About{" "}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Dhaal AI
+                  Dhaal IO
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -40,10 +40,10 @@ export default function LearnMorePage() {
               {/* Introduction Section */}
               <section className="space-y-6">
                 <h2 className="text-3xl font-bold text-foreground">
-                  What is Dhaal AI?
+                  What is Dhaal IO?
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Dhaal AI is a cutting-edge artificial intelligence platform
+                  Dhaal IO is a cutting-edge artificial intelligence platform
                   specifically designed to combat the growing threat of
                   deepfakes—sophisticated, AI-generated fake images and videos
                   that are becoming increasingly difficult to detect with the
@@ -53,8 +53,8 @@ export default function LearnMorePage() {
                 </p>
 
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  In todays digital landscape, where seeing is no longer
-                  believing, Dhaal AI provides the critical verification layer
+                  In today&apos;s digital landscape, where seeing is no longer
+                  believing, Dhaal IO provides the critical verification layer
                   needed to maintain trust in multimedia content. Our advanced
                   detection algorithms analyze digital media at the pixel level,
                   identifying subtle inconsistencies and artifacts that reveal
@@ -69,7 +69,7 @@ export default function LearnMorePage() {
                   Our Technology
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  At the heart of Dhaal AI lies state-of-the-art image forensics
+                  At the heart of Dhaal IO lies state-of-the-art image forensics
                   technology powered by deep neural networks. Our detection
                   models achieve over 98% accuracy in identifying deepfakes,
                   even those created with the most sophisticated generation
@@ -81,7 +81,7 @@ export default function LearnMorePage() {
                   Our upcoming video analysis module will extend these
                   capabilities to moving images, enabling comprehensive
                   protection across all multimedia formats. This advancement
-                  positions Dhaal AI as the most complete deepfake detection
+                  positions Dhaal IO as the most complete deepfake detection
                   solution available in the market.
                 </p>
               </section>
@@ -93,7 +93,7 @@ export default function LearnMorePage() {
                   Seamless Integration
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Dhaal AI is designed to integrate effortlessly with your
+                  Dhaal IO is designed to integrate effortlessly with your
                   existing security infrastructure. Our robust API allows for
                   easy implementation into content management systems, social
                   media platforms, news organizations, and enterprise security
@@ -103,7 +103,7 @@ export default function LearnMorePage() {
 
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   Whether you need batch processing for large media libraries or
-                  real-time verification for live content streams, Dhaal AI
+                  real-time verification for live content streams, Dhaal IO
                   adapts to your workflow requirements. Our flexible deployment
                   options include cloud-based solutions and on-premises
                   installations for organizations with strict data privacy
@@ -119,7 +119,7 @@ export default function LearnMorePage() {
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   The deepfake landscape is constantly evolving, with new
-                  generation techniques emerging regularly. Dhaal AI stays ahead
+                  generation techniques emerging regularly. Dhaal IO stays ahead
                   of these threats through continuous model updates and training
                   on the latest deepfake samples. Our research team actively
                   monitors emerging AI generation technologies to ensure our
@@ -128,9 +128,9 @@ export default function LearnMorePage() {
 
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   This commitment to innovation means that when you choose Dhaal
-                  AI, youre not just getting todays best detection
-                  technology—youre investing in a solution that will continue to
-                  protect you against tomorrows threats.
+                  IO, you&apos;re not just getting today&apos;s best detection
+                  technology—you&apos;re investing in a solution that will
+                  continue to protect you against tomorrow&apos;s threats.
                 </p>
               </section>
 
@@ -141,7 +141,7 @@ export default function LearnMorePage() {
                   Who We Protect
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  <strong>For Businesses:</strong> Dhaal AI safeguards brand
+                  <strong>For Businesses:</strong> Dhaal IO safeguards brand
                   reputation, prevents fraud, and maintains customer trust. From
                   protecting against fake CEO videos used in financial scams to
                   ensuring authentic marketing content, our technology serves as
@@ -150,7 +150,7 @@ export default function LearnMorePage() {
 
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   <strong>For Individuals:</strong> Personal identity protection
-                  is increasingly important in our digital age. Dhaal AI helps
+                  is increasingly important in our digital age. Dhaal IO helps
                   individuals verify suspicious content, protect against revenge
                   porn, and maintain control over their digital likeness. Our
                   technology empowers people to confidently navigate the digital
@@ -160,13 +160,13 @@ export default function LearnMorePage() {
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   <strong>For Organizations:</strong> News agencies, educational
                   institutions, legal firms, and government bodies rely on Dhaal
-                  AI to verify content authenticity, maintain information
+                  IO to verify content authenticity, maintain information
                   integrity, and make informed decisions based on trusted
                   multimedia evidence.
                 </p>
               </section>
 
-              {/* Call to Action */}
+              {/* Call to Action (optional) */}
               {/* <motion.section
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -179,7 +179,7 @@ export default function LearnMorePage() {
                 </h3>
                 <p className="text-lg text-muted-foreground">
                   Join the growing community of organizations and individuals
-                  who trust Dhaal AI to protect their digital reality.
+                  who trust Dhaal IO to protect their digital reality.
                 </p>
               </motion.section> */}
             </motion.div>

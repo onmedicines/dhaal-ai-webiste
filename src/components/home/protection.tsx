@@ -84,7 +84,7 @@ export default function ProtectionSection() {
           <h2 className="text-4xl font-bold mb-6">
             How{" "}
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
-              Dhaal AI
+              Dhaal IO
             </span>{" "}
             Keeps You Safe
           </h2>
