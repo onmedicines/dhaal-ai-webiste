@@ -7,12 +7,15 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import DhaalAndName from "../logo/dhaalandname";
+import DhaalAndNameLight from "../logo/dhaalandnamelight";
+import { useTheme } from "next-themes";
 
 export default function HomePageHeader() {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+  const { resolvedTheme } = useTheme();
 
   const navigationItems = [
     { label: "About", href: "/about", isExternal: true },
@@ -84,7 +87,11 @@ export default function HomePageHeader() {
                 transition={{ delay: isVisible ? 0.2 : 0, duration: 0.4 }}
                 className="flex items-center gap-3"
               >
-                <DhaalAndName size="sm" />
+                {resolvedTheme === "light" ? (
+                  <DhaalAndName size="sm" />
+                ) : (
+                  <DhaalAndNameLight size="sm" />
+                )}
               </motion.div>
             </Link>
 

@@ -6,9 +6,12 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import DhaalAndName from "../logo/dhaalandname";
+import DhaalAndNameLight from "../logo/dhaalandnamelight";
+import { useTheme } from "next-themes";
 
 export default function Header() {
   const router = useRouter();
+  const { resolvedTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigationItems = [
@@ -49,7 +52,11 @@ export default function Header() {
             {/* Logo Section */}
             <Link href="/" className="flex items-center gap-3">
               <div className="flex items-center gap-3">
-                <DhaalAndName size="sm" />
+                {resolvedTheme === "light" ? (
+                  <DhaalAndName size="sm" />
+                ) : (
+                  <DhaalAndNameLight size="sm" />
+                )}
               </div>
             </Link>
 

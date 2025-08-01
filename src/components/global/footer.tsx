@@ -3,8 +3,12 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 import DhaalAndName from "../logo/dhaalandname";
+import DhaalAndNameLight from "../logo/dhaalandnamelight";
+import { useTheme } from "next-themes";
 
 export default function Footer() {
+  const { resolvedTheme } = useTheme();
+
   return (
     <footer className="bg-gradient-to-b from-slate-50 to-gray-100 dark:from-slate-900 dark:to-slate-800 border-t border-gray-200 dark:border-slate-700">
       <div className="container mx-auto px-4 py-16">
@@ -21,7 +25,11 @@ export default function Footer() {
               <span className="text-2xl font-bold text-slate-800 dark:text-slate-200">
                 Dhaal AI
               </span> */}
-              <DhaalAndName size="lg" />
+              {resolvedTheme === "dark" ? (
+                <DhaalAndNameLight size="lg" />
+              ) : (
+                <DhaalAndName size="lg" />
+              )}
             </motion.div>
             <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               Advanced AI-powered deepfake detection technology protecting
