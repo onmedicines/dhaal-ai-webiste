@@ -3,9 +3,16 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-// import { Shield } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Play } from "lucide-react";
 import DhaalLogo from "@/components/logo/dhaal";
 import Link from "next/link";
+import { useState } from "react";
 
 // Animated Background Component
 const AnimatedShieldBackground = () => {
@@ -168,11 +175,6 @@ const AnimatedShieldBackground = () => {
           }}
           className="relative z-10"
         >
-          {/* <Shield
-            size={180}
-            className="text-blue-500 drop-shadow-lg"
-            fill="currentColor"
-          /> */}
           <DhaalLogo size={180} />
         </motion.div>
 
@@ -186,7 +188,7 @@ const AnimatedShieldBackground = () => {
             top: "50%",
             transform: "translate(-50%, -50%)",
           }}
-          viewBox="-800 -500 1600 1000" // Expanded width from 1200 to 1600 for longer horizontal lines
+          viewBox="-800 -500 1600 1000"
         >
           <defs>
             <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -265,7 +267,7 @@ const AnimatedShieldBackground = () => {
             </g>
           ))}
 
-          {/* Additional ambient lines that span across the viewport - Made much longer horizontally */}
+          {/* Additional ambient lines that span across the viewport */}
           <motion.path
             d="M -800 -200 L 800 -200"
             fill="none"
@@ -342,7 +344,7 @@ const AnimatedShieldBackground = () => {
             key={i}
             className="absolute w-2 h-2 bg-blue-400/80 rounded-full"
             style={{
-              left: (Math.random() - 0.5) * 1200, // Increased horizontal spread to match new viewBox
+              left: (Math.random() - 0.5) * 1200,
               top: (Math.random() - 0.5) * 800,
             }}
             animate={{
@@ -360,6 +362,42 @@ const AnimatedShieldBackground = () => {
         ))}
       </div>
     </div>
+  );
+};
+
+// Video Modal Component
+const VideoModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="lg" className="flex items-center gap-2">
+          <Play className="h-4 w-4" />
+          Watch Demo
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black border-0">
+        <DialogTitle className="sr-only">
+          Dhaal IO - Deepfake Detection Demo
+        </DialogTitle>
+
+        {/* Video container */}
+        <div className="relative aspect-video w-full bg-black">
+          <video
+            className="w-full h-full object-contain"
+            controls
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+          >
+            <source src="/dhaal-demo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 
@@ -389,16 +427,14 @@ export default function HeroSection() {
           Advanced deepfake detection software for images and videos—helping
           businesses and individuals stay safe from AI-generated threats.
         </p>
-        <div className="flex gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
             href="/about"
             className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-8"
           >
             Learn More
           </Link>
-          <Button variant="outline" size="lg">
-            Watch Demo
-          </Button>
+          <VideoModal />
         </div>
       </motion.div>
     </section>
