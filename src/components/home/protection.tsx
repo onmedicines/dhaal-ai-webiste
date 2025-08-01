@@ -2,9 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Search, Zap, Link, RotateCcw } from "lucide-react";
+import { Search, Zap, Link, RotateCcw, Play } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 export default function ProtectionSection() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
   const features = [
     {
       title: "Advanced Detection",
@@ -62,6 +71,46 @@ export default function ProtectionSection() {
     },
   };
 
+  // Video Modal Component
+  const VideoModal = () => {
+    return (
+      <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+        <DialogTrigger asChild>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              size="lg"
+              className="px-12 py-4 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+            >
+              <Play className="h-5 w-5" />
+              Watch Demo
+            </Button>
+          </motion.div>
+        </DialogTrigger>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black border-0">
+          <DialogTitle className="sr-only">
+            Dhaal IO - Protection Features Demo
+          </DialogTitle>
+
+          {/* Video container */}
+          <div className="relative aspect-video w-full bg-black">
+            <video
+              className="w-full h-full object-contain"
+              controls
+              autoPlay
+              muted
+              playsInline
+              preload="metadata"
+              onError={(e) => console.error("Video error:", e)}
+            >
+              <source src="/dhaal-demo.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  };
+
   return (
     <section
       id="protection"
@@ -77,7 +126,7 @@ export default function ProtectionSection() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} // Add this
+          viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
@@ -98,7 +147,7 @@ export default function ProtectionSection() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }} // Changed once: false to once: true
+          viewport={{ once: true, amount: 0.2 }}
           className="grid md:grid-cols-2 gap-8 mb-12"
         >
           {features.map(({ title, desc, icon: Icon, gradient }) => (
@@ -129,19 +178,11 @@ export default function ProtectionSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} // Add this
+          viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex justify-center"
         >
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              size="lg"
-              onClick={() => alert("Demo video coming soon!")}
-              className="px-12 py-4 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Watch Demo
-            </Button>
-          </motion.div>
+          <VideoModal />
         </motion.div>
       </div>
     </section>
