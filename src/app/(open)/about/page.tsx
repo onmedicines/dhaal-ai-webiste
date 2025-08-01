@@ -8,7 +8,7 @@ export default function LearnMorePage() {
   return (
     <>
       <Header />
-      <div className="pt-24 min-h-screen bg-gradient-to-b from-background via-secondary/5 to-background">
+      <div className="px-4 md:px-0 pt-24 min-h-screen bg-gradient-to-b from-background via-secondary/5 to-background">
         <div className="container mx-auto px-4 py-16">
           <article className="max-w-4xl mx-auto">
             {/* Hero Heading */}

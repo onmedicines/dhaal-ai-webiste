@@ -7,12 +7,14 @@ import { notFound } from "next/navigation";
 import { Calendar, User, Tag, ArrowLeft, Clock } from "lucide-react";
 import Link from "next/link";
 import Header from "@/components/global/header";
+import { useRouter } from "next/navigation";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
 export default function ArticlePage({ params }: Props) {
+  const router = useRouter();
   const { slug } = use(params);
   const article = articles.find((a) => a.slug === slug);
 
@@ -210,7 +212,10 @@ export default function ArticlePage({ params }: Props) {
                 our AI-powered solution today.
               </p>
               <div className="flex gap-4 justify-center">
-                <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg">
+                <button
+                  className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg"
+                  onClick={() => router.push("/login")}
+                >
                   Get Started
                 </button>
                 <Link

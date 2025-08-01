@@ -10,20 +10,22 @@ import Footer from "@/components/global/footer";
 
 export default function Home() {
   return (
-    <div className="overflow-x-hidden px-4 md:px-0">
-      <HomePageHeader />
-      <HeroSection />
-      <AboutDeepfake />
-      <ThreatCarousel />
-      <div className="hidden md:block">
-        <RealCasesSection />
+    <>
+      <div className="px-4 md:px-0">
+        <HomePageHeader />
+        <HeroSection />
+        <AboutDeepfake />
+        <ThreatCarousel />
+        <div className="hidden md:block">
+          <RealCasesSection />
+        </div>
+        <div className="md:hidden">
+          <RealCasesSectionMobile />
+        </div>
+        <ProtectionSection />
+        <CTASection />
       </div>
-      <div className="md:hidden">
-        <RealCasesSectionMobile />
-      </div>
-      <ProtectionSection />
-      <CTASection />
       <Footer />
-    </div>
+    </>
   );
 }
