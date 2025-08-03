@@ -5,6 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 type User = {
   name: string;
@@ -18,6 +28,13 @@ interface TopbarProps {
 }
 
 export default function Topbar({ user }: TopbarProps) {
+  const router = useRouter();
+
+  function signOut() {
+    localStorage.removeItem("authToken");
+    router.push("/login");
+  }
+
   return (
     <header className="bg-card border-b border-border px-6 py-4">
       <div className="flex items-center justify-between">
@@ -39,32 +56,43 @@ export default function Topbar({ user }: TopbarProps) {
             <Bell className="h-5 w-5" />
             <Badge
               variant="destructive"
-              className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs"
-            >
-              3
-            </Badge>
+              className="absolute top-1 right-1 h-2 w-2 rounded-full p-0 flex items-center justify-center text-xs"
+            ></Badge>
           </Button>
 
           {/* User Profile */}
-          <div className="flex items-center space-x-3">
-            {user.avatarUrl ? (
-              <Image
-                src={user.avatarUrl}
-                alt="Profile"
-                width={32}
-                height={32}
-                className="rounded-full object-cover"
-              />
-            ) : (
-              <User className="h-5 w-5" />
-            )}
-            <div className="hidden sm:block">
-              <p className="text-sm font-medium text-foreground">{user.name}</p>
-              <p className="text-xs text-muted-foreground capitalize">
-                {user.role}
-              </p>
-            </div>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="relative">
+                {user.avatarUrl ? (
+                  <Image
+                    src={user.avatarUrl}
+                    alt="Profile"
+                    width={32}
+                    height={32}
+                    className="rounded-full object-cover"
+                  />
+                ) : (
+                  <User className="h-5 w-5" />
+                )}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/profile">Profile</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/settings">Settings</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <button className="block w-full" onClick={() => signOut()}>
+                  Logout
+                </button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>

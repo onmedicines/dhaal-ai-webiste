@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Upload, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
+import { Upload, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function ThreatAnalysisUpload() {
@@ -62,7 +61,7 @@ export default function ThreatAnalysisUpload() {
         </div>
 
         {/* Recent Detections */}
-        <div className="space-y-3">
+        {/* <div className="space-y-3">
           <h4 className="font-semibold">Recent Detections</h4>
 
           <div className="space-y-3">
@@ -105,7 +104,7 @@ export default function ThreatAnalysisUpload() {
               <Badge variant="outline">23% confidence</Badge>
             </div>
           </div>
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   );
