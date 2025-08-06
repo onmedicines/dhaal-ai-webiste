@@ -79,7 +79,7 @@ export const metadata: Metadata = {
   // --- Favicons and App Icons ---
   // IMPORTANT: Make sure these icons exist in your `/public` folder.
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon.svg",
     // shortcut: "/favicon-16x16.png",
     // apple: "/apple-touch-icon.png",
   },
