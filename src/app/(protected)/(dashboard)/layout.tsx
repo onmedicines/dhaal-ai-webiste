@@ -1,28 +1,13 @@
 "use client";
 
-import { useEffect, useState, createContext, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/ui/spinner";
 import SidebarIndividual from "@/components/dashboard/individual/SidebarIndividual";
 import SidebarBusiness from "@/components/dashboard/business/SidebarBusiness";
 import Topbar from "@/components/dashboard/Topbar";
-
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  role: "individual" | "business";
-  isActive: boolean;
-  lastLogin: string | null;
-  detectionsCount: number;
-  createdAt: string;
-  updatedAt: string;
-  avatarUrl?: string; // Optional field not in backend
-};
-
-// Create user context for passing to children
-const UserContext = createContext<User | null>(null);
-export const useUser = () => useContext(UserContext);
+import { UserProvider } from "@/hooks/useUser";
+import { UserType } from "@/types/User";
 
 export default function DashboardLayout({
   children,
@@ -30,7 +15,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -73,7 +58,7 @@ export default function DashboardLayout({
           const userData = data.data.user;
 
           // Map the backend response to your frontend User type
-          const mappedUser: User = {
+          const mappedUser: UserType = {
             id: userData.id,
             name: userData.name,
             email: userData.email,
@@ -168,7 +153,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <UserContext.Provider value={user}>
+    <UserProvider user={user}>
       <div className="flex h-screen bg-muted/40 overflow-hidden">
         <div className="flex-shrink-0">
           {user.role === "individual" && <SidebarIndividual user={user} />}
@@ -183,6 +168,6 @@ export default function DashboardLayout({
           <main className="flex-1 overflow-y-auto p-4">{children}</main>
         </div>
       </div>
-    </UserContext.Provider>
+    </UserProvider>
   );
 }

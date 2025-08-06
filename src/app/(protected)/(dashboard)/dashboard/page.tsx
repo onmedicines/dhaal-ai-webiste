@@ -1,5 +1,5 @@
 "use client";
-import { useUser } from "@/app/(protected)/layout";
+import { useUser } from "@/hooks/useUser";
 import { useRouter } from "next/navigation";
 import IMain from "@/components/dashboard/individual/Main";
 import BMain from "@/components/dashboard/business/Main";

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import DhaalAndName from "../logo/dhaalandname";
 import DhaalAndNameLight from "../logo/dhaalandnamelight";
 import { useTheme } from "next-themes";
@@ -13,6 +13,7 @@ export default function Header() {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const navigationItems = [
     { label: "Home", href: "/", isExternal: true },
@@ -104,13 +105,15 @@ export default function Header() {
 
               {/* CTA Button (Always Visible) */}
               <div>
-                <Button
-                  size="sm"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-lg"
-                  onClick={() => router.push("/dashboard")}
-                >
-                  Get Started
-                </Button>
+                {pathname === "/contact" ? null : (
+                  <Button
+                    size="sm"
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-lg"
+                    onClick={() => router.push("/contact")}
+                  >
+                    Book a Demo
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -198,16 +201,18 @@ export default function Header() {
                 transitionDelay: isMobileMenuOpen ? "600ms" : "0ms",
               }}
             >
-              <Button
-                size="lg"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-lg"
-                onClick={() => {
-                  router.push("/dashboard");
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                Get Started
-              </Button>
+              {pathname === "/contact" ? null : (
+                <Button
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-lg"
+                  onClick={() => {
+                    router.push("/contact");
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Book a Demo
+                </Button>
+              )}
             </div>
           </div>
         </div>

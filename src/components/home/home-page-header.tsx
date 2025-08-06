@@ -157,9 +157,9 @@ export default function HomePageHeader() {
                 <Button
                   size="sm"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-lg"
-                  onClick={() => router.push("/dashboard")}
+                  onClick={() => router.push("/contact")}
                 >
-                  Get Started
+                  Book a Demo
                 </Button>
               </motion.div>
             </div>
@@ -257,11 +257,11 @@ export default function HomePageHeader() {
                 size="lg"
                 className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-lg"
                 onClick={() => {
-                  router.push("/dashboard");
+                  router.push("/contact");
                   setIsMobileMenuOpen(false);
                 }}
               >
-                Get Started
+                Book a Demo
               </Button>
             </motion.div>
           </div>

@@ -12,6 +12,7 @@ import {
   mediaTypeDetections,
   threatDistribution,
 } from "@/data/dummyDashboard";
+import Link from "next/link";
 
 // Types for better type safety
 interface StatCardProps {
@@ -83,10 +84,12 @@ function DashboardHeader() {
           <Bell className="h-4 w-4 mr-2" />
           Alerts
         </Button>
-        <Button className="gap-2">
-          <Search className="h-4 w-4" />
-          Quick Scan
-        </Button>
+        <Link href="/dashboard/scan">
+          <Button className="gap-2 cursor-pointer">
+            <Search className="h-4 w-4" />
+            Quick Scan
+          </Button>
+        </Link>
       </div>
     </div>
   );
