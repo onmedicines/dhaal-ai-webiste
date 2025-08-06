@@ -79,7 +79,7 @@ export default function CTASection() {
                 <Button
                   size="lg"
                   className="px-12 py-4 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl hover:shadow-2xl transition-all duration-300 border-0"
-                  onClick={() => router.push("/login")}
+                  onClick={() => router.push("/contact")}
                 >
                   Protect Yourself Now
                 </Button>
