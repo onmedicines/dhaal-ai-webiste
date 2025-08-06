@@ -44,18 +44,16 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               {[
-                "Image Detection",
-                "Video Analysis",
-                "API Access",
-                "Dashboard",
-                "Pricing",
-              ].map((item) => (
-                <li key={item}>
+                {name: "Image Detection", href: "#image-detection"},
+                {name: "Dashboard", href: "/dashboard"},
+                {name: "Contact Us", href: "/contact"},
+              ].map((item: {name: string, href: string}) => (
+                <li key={item.name}>
                   <a
-                    href="#"
+                    href={item.href}
                     className="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 text-sm transition-colors duration-200"
                   >
-                    {item}
+                    {item.name}
                   </a>
                 </li>
               ))}
@@ -68,17 +66,17 @@ export default function Footer() {
               Company
             </h4>
             <ul className="space-y-3">
-              {["About Us", "Careers", "Press Kit", "Blog", "Security"].map(
-                (item) => (
-                  <li key={item}>
+              {[{name: "About Us", href: "/about"}, {name: "Blog", href: "/blog"}].map(
+                (item: {name: string, href: string}) => (
+                  <li key={item.name}>
                     <a
-                      href="#"
+                      href={item.href}
                       className="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 text-sm transition-colors duration-200"
                     >
-                      {item}
+                      {item.name}
                     </a>
                   </li>
-                ),
+                )
               )}
             </ul>
           </div>
@@ -117,8 +115,8 @@ export default function Footer() {
             {[
               { name: "Privacy Policy", href: "/privacy_policy" },
               { name: "Terms of Service", href: "/t&c" },
-              { name: "Cookie Policy", href: "/cookie-policy" },
-              { name: "GDPR Compliance", href: "/gdpr-compliance" },
+              // { name: "Cookie Policy", href: "/cookie-policy" },
+              // { name: "GDPR Compliance", href: "/gdpr-compliance" },
             ].map((item) => (
               <a
                 key={item.name}
