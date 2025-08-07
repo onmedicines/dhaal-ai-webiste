@@ -9,11 +9,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   // --- Basic Metadata ---
   title: {
-    default: "Dhaal AI | Your Digital Shield Against Deepfakes & Scams",
-    template: `%s | Dhaal AI`,
+    default: "Dhaal io | Your Digital Shield Against Deepfakes & Scams",
+    template: `%s | Dhaal io`,
   },
   description:
-    "Protect yourself with Dhaal AI, the leading tool for detecting deepfakes, online scams, and fraudulent content. Instantly analyze images, videos, and URLs to stay safe online.",
+    "Protect yourself with Dhaal io, the leading tool for detecting deepfakes, online scams, and fraudulent content. Instantly analyze images, videos, and URLs to stay safe online.",
 
   // --- Keywords & SEO Tags ---
   keywords: [
@@ -30,8 +30,7 @@ export const metadata: Metadata = {
     "Disinformation",
     "Phishing protection",
     "Cybersecurity",
-    "Dhaal AI",
-    "Dhaal.io",
+    "Dhaal io",
   ],
 
   // --- Canonical URL and Base ---
@@ -41,23 +40,23 @@ export const metadata: Metadata = {
   },
 
   // --- Author and Creator Information ---
-  creator: "Dhaal AI Team",
-  authors: [{ name: "Dhaal AI Team", url: "https://dhaal.io" }],
+  creator: "Dhaal io Team",
+  authors: [{ name: "Dhaal io Team", url: "https://dhaal.io" }],
 
   // --- Open Graph (OG) Tags for Social Media Sharing ---
   openGraph: {
-    title: "Dhaal AI | Your Digital Shield Against Deepfakes & Scams",
+    title: "Dhaal io | Your Digital Shield Against Deepfakes & Scams",
     description:
-      "Instantly analyze content to detect deepfakes and scams with Dhaal AI.",
+      "Instantly analyze content to detect deepfakes and scams with Dhaal io.",
     url: "https://dhaal.io",
-    siteName: "Dhaal AI",
+    siteName: "Dhaal io",
     // IMPORTANT: Create an engaging image (1200x630px) and place it in your `/public` folder.
     images: [
       {
         url: "/dhaal-og-image.png", // Example: https://dhaal.io/dhaal-og-image.png
         width: 1200,
         height: 630,
-        alt: "Dhaal AI - Digital Shield Against Online Scams and Deepfakes",
+        alt: "Dhaal io - Digital Shield Against Online Scams and Deepfakes",
       },
     ],
     locale: "en_US",
@@ -67,13 +66,13 @@ export const metadata: Metadata = {
   // --- Twitter Card Tags ---
   twitter: {
     card: "summary_large_image",
-    title: "Dhaal AI | Your Digital Shield Against Deepfakes & Scams",
+    title: "Dhaal io | Your Digital Shield Against Deepfakes & Scams",
     description:
-      "Instantly analyze content to detect deepfakes and scams with Dhaal AI.",
+      "Instantly analyze content to detect deepfakes and scams with Dhaal io.",
     // IMPORTANT: This can be the same image as the Open Graph image.
     images: ["/dhaal-og-image.png"],
     // IMPORTANT: Replace with your company's actual Twitter handle if you have one.
-    creator: "@DhaalAI",
+    creator: "@DhaalIo",
   },
 
   // --- Favicons and App Icons ---

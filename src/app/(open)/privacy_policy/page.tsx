@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import DhaalLogo from "@/components/logo/dhaal";
@@ -14,16 +13,10 @@ const Section = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <motion.section
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-    className="mb-12 max-w-3xl mx-auto"
-  >
+  <section className="mb-12 max-w-3xl mx-auto">
     <h2 className="text-2xl font-bold mb-3">{title}</h2>
     <div className="space-y-4 text-muted-foreground text-base">{children}</div>
-  </motion.section>
+  </section>
 );
 
 export default function PrivacyPolicyPage() {
@@ -38,14 +31,9 @@ export default function PrivacyPolicyPage() {
           <Badge variant="secondary" className="mb-4">
             Privacy First
           </Badge>
-          <motion.h1
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="text-4xl md:text-6xl font-extrabold text-center mb-2"
-          >
-            Dhaal.AI Privacy Policy
-          </motion.h1>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-center mb-2">
+            Dhaal.io Privacy Policy
+          </h1>
           <div className="text-muted-foreground text-lg text-center max-w-xl">
             Effective Date: March 20, 2025
           </div>
@@ -54,11 +42,12 @@ export default function PrivacyPolicyPage() {
         {/* Core sections */}
         <Section title="1. Introduction">
           <p>
-            Welcome to <b>Dhaal.AI</b> (<i>“we,” “us,” “our”</i>). Your privacy
-            is our priority. Dhaal.AI is a digital shield designed to protect
-            you from online scams, fraud, and deepfakes by analyzing media and
-            text. This policy explains what we collect, how we use it, your
-            rights, and how we protect your data.
+            Welcome to <b>Dhaal.io</b> (
+            <i>&quot;we,&quot; &quot;us,&quot; &quot;our&quot;</i>). Your
+            privacy is our priority. Dhaal.io is a digital shield designed to
+            protect you from online scams, fraud, and deepfakes by analyzing
+            media and text. This policy explains what we collect, how we use it,
+            your rights, and how we protect your data.
           </p>
         </Section>
 
@@ -84,7 +73,7 @@ export default function PrivacyPolicyPage() {
               alerts.
             </li>
             <li>
-              <b>Auto-Scan Media:</b> (If enabled by you) Dhaal.AI can access
+              <b>Auto-Scan Media:</b> (If enabled by you) Dhaal.io can access
               and auto-scan new media on your device for risks—only flagged
               files get uploaded for deeper scan.
             </li>
@@ -122,7 +111,8 @@ export default function PrivacyPolicyPage() {
             <li>
               With trusted
               <br className="hidden md:inline" /> service providers (hosting,
-              analytics, support)—they can’t use your data for anything else.
+              analytics, support)—they can&apos;t use your data for anything
+              else.
             </li>
             <li>When required by law or court/government order.</li>
             <li>During a company merger/acquisition—with advance notice.</li>
@@ -178,10 +168,11 @@ export default function PrivacyPolicyPage() {
           </ul>
         </Section>
 
-        <Section title="8. Children’s Privacy">
+        <Section title="8. Children's Privacy">
           <p>
-            Dhaal.AI is <b>not for children under 13</b>. If we learn a child’s
-            information was collected, we’ll delete it promptly.
+            Dhaal.io is <b>not for children under 13</b>. If we learn a
+            child&apos;s information was collected, we&apos;ll delete it
+            promptly.
           </p>
         </Section>
 

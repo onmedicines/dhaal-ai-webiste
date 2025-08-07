@@ -1,13 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import DhaalLogo from "@/components/logo/dhaal";
 import Link from "next/link";
 import Header from "@/components/global/header";
 
-// Section component for visual consistency
+// Section component for visual consistency - animations removed
 const Section = ({
   title,
   children,
@@ -15,16 +15,10 @@ const Section = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <motion.section
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-    className="mb-12 max-w-3xl mx-auto"
-  >
+  <section className="mb-12 max-w-3xl mx-auto">
     <h2 className="text-2xl font-bold mb-3">{title}</h2>
     <div className="space-y-4 text-muted-foreground text-base">{children}</div>
-  </motion.section>
+  </section>
 );
 
 export default function TermsPage() {
@@ -39,14 +33,9 @@ export default function TermsPage() {
           <Badge variant="secondary" className="mb-4">
             Terms of Use
           </Badge>
-          <motion.h1
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="text-4xl md:text-6xl font-extrabold text-center mb-2"
-          >
-            Dhaal.AI Terms &amp; Conditions
-          </motion.h1>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-center mb-2">
+            Dhaal.io Terms &amp; Conditions
+          </h1>
           <div className="text-muted-foreground text-lg text-center max-w-xl">
             Effective Date: March 21, 2025
           </div>
@@ -54,8 +43,8 @@ export default function TermsPage() {
 
         <Section title="1. Agreement to Terms">
           <p>
-            Welcome to <b>Dhaal.AI</b>. These Terms &amp; Conditions
-            (&quot;Terms&quot;) govern your access to and use of the Dhaal.AI
+            Welcome to <b>Dhaal.io</b>. These Terms &amp; Conditions
+            (&quot;Terms&quot;) govern your access to and use of the Dhaal.io
             mobile app and related services (&quot;Services&quot;) provided by
             us.
           </p>
@@ -71,7 +60,7 @@ export default function TermsPage() {
 
         <Section title="2. Description of Services">
           <p>
-            Dhaal.AI provides digital protection to help identify and protect
+            Dhaal.io provides digital protection to help identify and protect
             you from online scams, fraud, deepfakes, and other malicious
             content. Services include analysis of user-submitted media (images,
             videos, audio), text, URLs, and community-based reporting/alert
@@ -123,7 +112,7 @@ export default function TermsPage() {
                 </li>
                 <li>
                   Disrupt the integrity or performance of the Services or
-                  others’ data.
+                  others&apos; data.
                 </li>
               </ul>
             </li>
@@ -137,7 +126,7 @@ export default function TermsPage() {
               videos, reports, URLs) you submit.
             </li>
             <li>
-              <b>License to Us:</b> By submitting content, you grant Dhaal.AI a
+              <b>License to Us:</b> By submitting content, you grant Dhaal.io a
               global, non-exclusive, royalty-free license to use, store,
               analyze, reproduce, and prepare derivatives (such as anonymized
               datasets) of your content for operating, improving, and developing
@@ -151,9 +140,9 @@ export default function TermsPage() {
 
         <Section title="6. Our Intellectual Property">
           <p>
-            Dhaal.AI and its licensors own all rights to the Services, including
+            Dhaal.io and its licensors own all rights to the Services, including
             designs, software, logos, and technology. The Services are protected
-            by copyright and trademark laws. Do not use the Dhaal.AI name,
+            by copyright and trademark laws. Do not use the Dhaal.io name,
             trademarks, or logos without written permission.
           </p>
         </Section>
@@ -166,7 +155,7 @@ export default function TermsPage() {
               implied.
             </li>
             <li>
-              Dhaal.AI does <b>not</b> guarantee:{" "}
+              Dhaal.io does <b>not</b> guarantee:{" "}
               <ul className="list-disc ml-6">
                 <li>
                   100% accuracy in analysis or that all scams/frauds/deepfakes
@@ -187,7 +176,7 @@ export default function TermsPage() {
 
         <Section title="8. Limitation of Liability">
           <p>
-            To the extent permitted by law, Dhaal.AI and its team will{" "}
+            To the extent permitted by law, Dhaal.io and its team will{" "}
             <b>not</b> be liable for indirect, incidental, special,
             consequential, or punitive damages—including loss of profits, data,
             goodwill, or use—arising from use of our Services, third-party
@@ -198,7 +187,7 @@ export default function TermsPage() {
 
         <Section title="9. Indemnification">
           <p>
-            You agree to indemnify and hold harmless Dhaal.AI and its team from
+            You agree to indemnify and hold harmless Dhaal.io and its team from
             all claims, damages, or costs (including legal fees) arising out of
             your use of the Services or violation of these Terms.
           </p>
@@ -230,10 +219,10 @@ export default function TermsPage() {
 
         <Section title="12. Changes to Terms">
           <p>
-            Dhaal.AI may update these Terms at any time, at its sole discretion.
+            Dhaal.io may update these Terms at any time, at its sole discretion.
             Material changes will be announced by notice in the App or other
-            channels, with at least 30 days’ notice. Continued use after changes
-            means acceptance.
+            channels, with at least 30 days&apos; notice. Continued use after
+            changes means acceptance.
           </p>
         </Section>
 
