@@ -71,128 +71,128 @@ const TextAnalysisSDK: React.FC = () => {
 
   // Sample code examples for different languages
   const codeExamples = {
-    javascript: `// Install: npm install @yourcompany/text-analysis-sdk
+    javascript: `// Install: npm install @dhaal/text-analysis-sdk
 
-import { TextAnalyzer } from '@yourcompany/text-analysis-sdk';
+  import { TextAnalyzer } from '@dhaal/text-analysis-sdk';
 
-const analyzer = new TextAnalyzer({
-  apiKey: 'your-api-key',
-  endpoint: 'https://api.yourcompany.com/v1'
-});
+  const analyzer = new TextAnalyzer({
+    apiKey: 'your-api-key',
+    endpoint: 'https://api.dhaal.io/v1'
+  });
 
-async function analyzeText() {
-  try {
-    const result = await analyzer.analyze({
-      text: "Your text content here",
-      features: [
-        'sentiment',
-        'entities',
-        'keywords',
-        'topics',
-        'emotions'
-      ],
-      language: 'auto' // or specify: 'en', 'es', 'fr', etc.
-    });
+  async function analyzeText() {
+    try {
+      const result = await analyzer.analyze({
+        text: "Your text content here",
+        features: [
+          'sentiment',
+          'entities',
+          'keywords',
+          'topics',
+          'emotions'
+        ],
+        language: 'auto' // or specify: 'en', 'es', 'fr', etc.
+      });
 
-    console.log('Sentiment:', result.sentiment);
-    console.log('Entities:', result.entities);
-    console.log('Keywords:', result.keywords);
+      console.log('Sentiment:', result.sentiment);
+      console.log('Entities:', result.entities);
+      console.log('Keywords:', result.keywords);
 
-    return result;
-  } catch (error) {
-    console.error('Analysis failed:', error);
-  }
-}`,
+      return result;
+    } catch (error) {
+      console.error('Analysis failed:', error);
+    }
+  }`,
 
-    python: `# Install: pip install yourcompany-text-analysis
+    python: `# Install: pip install dhaal-text-analysis
 
-from yourcompany_text_analysis import TextAnalyzer
+  from dhaal_text_analysis import TextAnalyzer
 
-# Initialize the analyzer
-analyzer = TextAnalyzer(
-    api_key="your-api-key",
-    endpoint="https://api.yourcompany.com/v1"
-)
+  # Initialize the analyzer
+  analyzer = TextAnalyzer(
+      api_key="your-api-key",
+      endpoint="https://api.dhaal.io/v1"
+  )
 
-def analyze_text():
-    try:
-        result = analyzer.analyze(
-            text="Your text content here",
-            features=[
-                'sentiment',
-                'entities',
-                'keywords',
-                'topics',
-                'emotions'
-            ],
-            language='auto'  # or specify: 'en', 'es', 'fr', etc.
-        )
+  def analyze_text():
+      try:
+          result = analyzer.analyze(
+              text="Your text content here",
+              features=[
+                  'sentiment',
+                  'entities',
+                  'keywords',
+                  'topics',
+                  'emotions'
+              ],
+              language='auto'  # or specify: 'en', 'es', 'fr', etc.
+          )
 
-        print(f"Sentiment: {result.sentiment}")
-        print(f"Entities: {result.entities}")
-        print(f"Keywords: {result.keywords}")
+          print(f"Sentiment: {result.sentiment}")
+          print(f"Entities: {result.entities}")
+          print(f"Keywords: {result.keywords}")
 
-        return result
+          return result
 
-    except Exception as error:
-        print(f"Analysis failed: {error}")`,
+      except Exception as error:
+          print(f"Analysis failed: {error}")`,
 
     curl: `# Direct REST API call
 
-curl -X POST "https://api.yourcompany.com/v1/analyze" \\
-  -H "Authorization: Bearer your-api-key" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "text": "Your text content here",
-    "features": [
-      "sentiment",
-      "entities",
-      "keywords",
-      "topics",
-      "emotions"
-    ],
-    "language": "auto"
-  }'`,
+  curl -X POST "https://api.dhaal.io/v1/analyze" \\
+    -H "Authorization: Bearer your-api-key" \\
+    -H "Content-Type: application/json" \\
+    -d '{
+      "text": "Your text content here",
+      "features": [
+        "sentiment",
+        "entities",
+        "keywords",
+        "topics",
+        "emotions"
+      ],
+      "language": "auto"
+    }'`,
 
     java: `// Add to pom.xml:
-// <dependency>
-//   <groupId>com.yourcompany</groupId>
-//   <artifactId>text-analysis-sdk</artifactId>
-//   <version>1.0.0</version>
-// </dependency>
+  // <dependency>
+  //   <groupId>io.dhaal</groupId>
+  //   <artifactId>text-analysis-sdk</artifactId>
+  //   <version>1.0.0</version>
+  // </dependency>
 
-import com.yourcompany.textanalysis.TextAnalyzer;
-import com.yourcompany.textanalysis.AnalysisRequest;
-import com.yourcompany.textanalysis.AnalysisResult;
+  import io.dhaal.textanalysis.TextAnalyzer;
+  import io.dhaal.textanalysis.AnalysisRequest;
+  import io.dhaal.textanalysis.AnalysisResult;
 
-public class TextAnalysisExample {
-    public static void main(String[] args) {
-        TextAnalyzer analyzer = new TextAnalyzer.Builder()
-            .apiKey("your-api-key")
-            .endpoint("https://api.yourcompany.com/v1")
-            .build();
+  public class TextAnalysisExample {
+      public static void main(String[] args) {
+          TextAnalyzer analyzer = new TextAnalyzer.Builder()
+              .apiKey("your-api-key")
+              .endpoint("https://api.dhaal.io/v1")
+              .build();
 
-        try {
-            AnalysisRequest request = AnalysisRequest.builder()
-                .text("Your text content here")
-                .features(Arrays.asList(
-                    "sentiment", "entities", "keywords",
-                    "topics", "emotions"
-                ))
-                .language("auto")
-                .build();
+          try {
+              AnalysisRequest request = AnalysisRequest.builder()
+                  .text("Your text content here")
+                  .features(Arrays.asList(
+                      "sentiment", "entities", "keywords",
+                      "topics", "emotions"
+                  ))
+                  .language("auto")
+                  .build();
 
-            AnalysisResult result = analyzer.analyze(request);
+              AnalysisResult result = analyzer.analyze(request);
 
-            System.out.println("Sentiment: " + result.getSentiment());
-            System.out.println("Entities: " + result.getEntities());
-            System.out.println("Keywords: " + result.getKeywords());
+              System.out.println("Sentiment: " + result.getSentiment());
+              System.out.println("Entities: " + result.getEntities());
+              System.out.println("Keywords: " + result.getKeywords());
 
-        } catch (Exception e) {
-            System.err.println("Analysis failed: " + e.getMessage());
-        }
-    }
-}`,
+          } catch (Exception e) {
+              System.err.println("Analysis failed: " + e.getMessage());
+          }
+      }
+  }`,
   };
 
   // Mock analysis function
@@ -622,6 +622,68 @@ public class TextAnalysisExample {
 
         {/* Quick Start Tab */}
         <TabsContent value="quickstart" className="space-y-6">
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card className="flex flex-col justify-between">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center">
+                    1
+                  </span>
+                  Get API Key
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  Sign up and get your API key from the dashboard
+                </p>
+                <Button variant="outline" className="w-full">
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  Get API Key
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="flex flex-col justify-between">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center">
+                    2
+                  </span>
+                  Install SDK
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  Install our SDK in your preferred language
+                </p>
+                <Button variant="outline" className="w-full">
+                  <Download className="w-4 h-4 mr-2" />
+                  View Installation
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="flex flex-col justify-between">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center">
+                    3
+                  </span>
+                  Start Building
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  Make your first API call and start analyzing text
+                </p>
+                <Button variant="outline" className="w-full">
+                  <Book className="w-4 h-4 mr-2" />
+                  View Docs
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
           <Card>
             <CardHeader>
               <CardTitle>Choose Your Language</CardTitle>
@@ -667,68 +729,6 @@ public class TextAnalysisExample {
               </div>
             </CardContent>
           </Card>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <span className="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center">
-                    1
-                  </span>
-                  Get API Key
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Sign up and get your API key from the dashboard
-                </p>
-                <Button variant="outline" className="w-full">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  Get API Key
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <span className="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center">
-                    2
-                  </span>
-                  Install SDK
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Install our SDK in your preferred language
-                </p>
-                <Button variant="outline" className="w-full">
-                  <Download className="w-4 h-4 mr-2" />
-                  View Installation
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <span className="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center">
-                    3
-                  </span>
-                  Start Building
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Make your first API call and start analyzing text
-                </p>
-                <Button variant="outline" className="w-full">
-                  <Book className="w-4 h-4 mr-2" />
-                  View Docs
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
         </TabsContent>
 
         {/* Documentation Tab */}
