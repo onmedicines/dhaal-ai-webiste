@@ -75,37 +75,36 @@ export default function ContactPage() {
     e.preventDefault();
     setServerError("");
     setSuccess(false);
-  
+
     if (!validate()) return;
-  
+
     setIsSubmitting(true);
     try {
       // Create FormData instead of JSON
       const formData = new FormData();
-      formData.append('name', fields.name);
-      formData.append('phone', fields.phone);
-      formData.append('email', fields.email);
-      formData.append('organization', fields.organization);
-      formData.append('website', fields.website);
-      formData.append('message', fields.message);
-  
-      const response = await fetch(`${process.env.NEXT_PUBLIC_GOOGLE_APP_SCRIPT_URL}`, {
-        method: 'POST',
-        body: formData // No Content-Type header needed - browser sets it automatically
+      formData.append("name", fields.name);
+      formData.append("phone", fields.phone);
+      formData.append("email", fields.email);
+      formData.append("organization", fields.organization);
+      formData.append("website", fields.website);
+      formData.append("message", fields.message);
+
+      await fetch(`${process.env.NEXT_PUBLIC_GOOGLE_APP_SCRIPT_URL}`, {
+        method: "POST",
+        body: formData, // No Content-Type header needed - browser sets it automatically
       });
-  
-      
-        setSuccess(true);
-        setFields({
-          name: "",
-          phone: "",
-          email: "",
-          organization: "",
-          website: "",
-          message: "",
-        });
+
+      setSuccess(true);
+      setFields({
+        name: "",
+        phone: "",
+        email: "",
+        organization: "",
+        website: "",
+        message: "",
+      });
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error("Submission error:", error);
       setSuccess(true);
       setFields({
         name: "",
@@ -119,7 +118,7 @@ export default function ContactPage() {
       setIsSubmitting(false);
     }
   };
-  
+
   // Reduced animation variants for subtle background
   const floatingVariants = {
     animate: {
@@ -180,7 +179,7 @@ export default function ContactPage() {
                 variants={floatingVariants}
                 animate="animate"
               />
-              
+
               <motion.circle
                 cx="600"
                 cy="200"
@@ -223,19 +222,43 @@ export default function ContactPage() {
 
               {/* Gradient Definitions */}
               <defs>
-                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient
+                  id="gradient1"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
                   <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.4" />
                   <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.2" />
                 </linearGradient>
-                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient
+                  id="gradient2"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
                   <stop offset="0%" stopColor="#10B981" stopOpacity="0.4" />
                   <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.2" />
                 </linearGradient>
-                <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient
+                  id="gradient3"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
                   <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.3" />
                   <stop offset="100%" stopColor="#EF4444" stopOpacity="0.1" />
                 </linearGradient>
-                <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="0%">
+                <linearGradient
+                  id="gradient4"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
                   <stop offset="0%" stopColor="#60A5FA" />
                   <stop offset="50%" stopColor="#A78BFA" />
                   <stop offset="100%" stopColor="#34D399" />
@@ -281,7 +304,9 @@ export default function ContactPage() {
 
               {/* Full Name */}
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
+                <Label htmlFor="name" className="text-sm font-medium">
+                  Full Name
+                </Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -296,13 +321,17 @@ export default function ContactPage() {
                   />
                 </div>
                 {errors.name && (
-                  <div className="text-xs text-red-600 dark:text-red-400 mt-1">{errors.name}</div>
+                  <div className="text-xs text-red-600 dark:text-red-400 mt-1">
+                    {errors.name}
+                  </div>
                 )}
               </div>
 
               {/* Phone Number */}
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-sm font-medium">Phone Number</Label>
+                <Label htmlFor="phone" className="text-sm font-medium">
+                  Phone Number
+                </Label>
                 <div className="relative">
                   <PhoneCall className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -318,13 +347,17 @@ export default function ContactPage() {
                   />
                 </div>
                 {errors.phone && (
-                  <div className="text-xs text-red-600 dark:text-red-400 mt-1">{errors.phone}</div>
+                  <div className="text-xs text-red-600 dark:text-red-400 mt-1">
+                    {errors.phone}
+                  </div>
                 )}
               </div>
 
               {/* Work Email */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">Work Email</Label>
+                <Label htmlFor="email" className="text-sm font-medium">
+                  Work Email
+                </Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -341,13 +374,17 @@ export default function ContactPage() {
                   />
                 </div>
                 {errors.email && (
-                  <div className="text-xs text-red-600 dark:text-red-400 mt-1">{errors.email}</div>
+                  <div className="text-xs text-red-600 dark:text-red-400 mt-1">
+                    {errors.email}
+                  </div>
                 )}
               </div>
 
               {/* Organisation Name */}
               <div className="space-y-2">
-                <Label htmlFor="organization" className="text-sm font-medium">Organisation Name</Label>
+                <Label htmlFor="organization" className="text-sm font-medium">
+                  Organisation Name
+                </Label>
                 <div className="relative">
                   <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -356,7 +393,9 @@ export default function ContactPage() {
                     placeholder="Company or institution name"
                     className="pl-10 h-10"
                     value={fields.organization}
-                    onChange={(e) => handleField("organization", e.target.value)}
+                    onChange={(e) =>
+                      handleField("organization", e.target.value)
+                    }
                     disabled={isSubmitting}
                     required
                   />
@@ -370,7 +409,9 @@ export default function ContactPage() {
 
               {/* Website */}
               <div className="space-y-2">
-                <Label htmlFor="website" className="text-sm font-medium">Website</Label>
+                <Label htmlFor="website" className="text-sm font-medium">
+                  Website
+                </Label>
                 <div className="relative">
                   <Globe className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -393,7 +434,9 @@ export default function ContactPage() {
 
               {/* Message */}
               <div className="space-y-2">
-                <Label htmlFor="message" className="text-sm font-medium">Anything else we should know?</Label>
+                <Label htmlFor="message" className="text-sm font-medium">
+                  Anything else we should know?
+                </Label>
                 <Textarea
                   id="message"
                   name="message"
@@ -405,7 +448,11 @@ export default function ContactPage() {
                 />
               </div>
 
-              <Button type="submit" className="w-full h-11" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                className="w-full h-11"
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

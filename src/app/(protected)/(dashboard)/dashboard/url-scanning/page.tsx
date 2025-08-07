@@ -1,25 +1,35 @@
-'use client';
+"use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 import {
-  Globe, Shield, AlertTriangle, CheckCircle, Search,
-  RefreshCw, Eye, BarChart3,
-  Lock, FileText, MapPin, Clock,
-  Copy, Info, AlertCircle, Target
-} from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
-import { findLegitimateURL, generatePhishingMetrics, URLData } from '@/data/urlDatabase';
+  Globe,
+  Shield,
+  AlertTriangle,
+  CheckCircle,
+  Search,
+  RefreshCw,
+  Eye,
+  BarChart3,
+  Lock,
+  Clock,
+  Copy,
+  Info,
+  AlertCircle,
+  Target,
+} from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { findLegitimateURL, generatePhishingMetrics } from "@/data/urlDatabase";
 
 interface URLAnalysisResult {
   url: string;
   isLegitimate: boolean;
   confidence: number;
   riskScore: number;
-  threatLevel: 'low' | 'medium' | 'high' | 'critical';
+  threatLevel: "low" | "medium" | "high" | "critical";
   detectedIssues: string[];
   securityAnalysis: {
     databaseResult: {
@@ -51,12 +61,13 @@ interface URLAnalysisResult {
 }
 
 const URLAuthenticityChecker: React.FC = () => {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [analysisResult, setAnalysisResult] = useState<URLAnalysisResult | null>(null);
+  const [analysisResult, setAnalysisResult] =
+    useState<URLAnalysisResult | null>(null);
   const [urlHistory, setUrlHistory] = useState<string[]>([]);
-  const [error, setError] = useState<string>('');
-  
+  const [error, setError] = useState<string>("");
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Additional domain analysis for suspicious patterns
@@ -65,74 +76,93 @@ const URLAuthenticityChecker: React.FC = () => {
       const urlObj = new URL(inputUrl);
       const domain = urlObj.hostname.toLowerCase();
       const suspicious = [];
-      
+
       // Check for suspicious patterns
-      if (domain.includes('-') && domain.split('-').length > 3) {
-        suspicious.push('Multiple hyphens in domain');
+      if (domain.includes("-") && domain.split("-").length > 3) {
+        suspicious.push("Multiple hyphens in domain");
       }
-      
+
       if (/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/.test(domain)) {
-        suspicious.push('IP address instead of domain name');
+        suspicious.push("IP address instead of domain name");
       }
-      
+
       if (domain.length > 30) {
-        suspicious.push('Unusually long domain name');
+        suspicious.push("Unusually long domain name");
       }
-      
+
       if (/[0-9]{4,}/.test(domain)) {
-        suspicious.push('Domain contains long number sequences');
+        suspicious.push("Domain contains long number sequences");
       }
-      
+
       // Common phishing keywords
       const suspiciousKeywords = [
-        'secure', 'verification', 'update', 'confirm', 'account', 
-        'login', 'banking', 'paypal', 'amazon', 'microsoft',
-        'apple', 'google', 'facebook', 'twitter', 'instagram'
+        "secure",
+        "verification",
+        "update",
+        "confirm",
+        "account",
+        "login",
+        "banking",
+        "paypal",
+        "amazon",
+        "microsoft",
+        "apple",
+        "google",
+        "facebook",
+        "twitter",
+        "instagram",
       ];
-      
-      const hasSuspiciousKeywords = suspiciousKeywords.some(keyword => 
-        domain.includes(keyword) && !domain.endsWith('.com') && !domain.endsWith('.org')
+
+      const hasSuspiciousKeywords = suspiciousKeywords.some(
+        (keyword) =>
+          domain.includes(keyword) &&
+          !domain.endsWith(".com") &&
+          !domain.endsWith(".org"),
       );
-      
+
       if (hasSuspiciousKeywords) {
-        suspicious.push('Contains brand names often used in phishing');
+        suspicious.push("Contains brand names often used in phishing");
       }
-      
+
       // Check for homograph attacks (similar looking characters)
-      if (/[а-я]/.test(domain) || /[àáâãäåæçèéêëìíîïñòóôõöøùúûüý]/.test(domain)) {
-        suspicious.push('Contains non-Latin characters that may be deceptive');
+      if (
+        /[а-я]/.test(domain) ||
+        /[àáâãäåæçèéêëìíîïñòóôõöøùúûüý]/.test(domain)
+      ) {
+        suspicious.push("Contains non-Latin characters that may be deceptive");
       }
-      
+
       return {
         suspicious: suspicious.length > 0,
-        reasons: suspicious
+        reasons: suspicious,
       };
     } catch (error) {
+      console.error("Error analyzing URL:", error);
       return { suspicious: false, reasons: [] };
     }
   };
 
   // Main analysis function using offline database
   const analyzeURL = async (inputUrl: string): Promise<URLAnalysisResult> => {
-    setError('');
-    
+    setError("");
+
     // Simulate analysis delay for better UX
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
     try {
       // Ensure URL has protocol
       let processedUrl = inputUrl;
-      if (!inputUrl.startsWith('http://') && !inputUrl.startsWith('https://')) {
-        processedUrl = 'https://' + inputUrl;
+      if (!inputUrl.startsWith("http://") && !inputUrl.startsWith("https://")) {
+        processedUrl = "https://" + inputUrl;
       }
-      
+
       // Parse URL
       const urlObj = new URL(processedUrl);
-      
+
       // Check if URL is in our legitimate database
       const legitimateData = findLegitimateURL(processedUrl);
       const domainAnalysis = analyzeDomain(processedUrl);
-      
+
       // Create default structure to avoid undefined errors
       const baseResult = {
         url: processedUrl,
@@ -140,32 +170,32 @@ const URLAuthenticityChecker: React.FC = () => {
           databaseResult: {
             inDatabase: false,
             verified: false,
-            source: 'Offline Database Check'
+            source: "Offline Database Check",
           },
           sslCertificate: {
-            valid: urlObj.protocol === 'https:',
-            protocol: urlObj.protocol
+            valid: urlObj.protocol === "https:",
+            protocol: urlObj.protocol,
           },
           domainAnalysis: {
             suspicious: domainAnalysis.suspicious,
-            reasons: domainAnalysis.reasons
-          }
+            reasons: domainAnalysis.reasons,
+          },
         },
         technicalDetails: {
           domain: urlObj.hostname,
           protocol: urlObj.protocol,
-          domainAge: 'Unknown',
-          registrar: 'Unknown',
-          location: 'Unknown',
+          domainAge: "Unknown",
+          registrar: "Unknown",
+          location: "Unknown",
           technologies: [],
-          submittedAt: new Date().toISOString()
+          submittedAt: new Date().toISOString(),
         },
         legitimacyMarkers: [],
         contentQuality: 0,
         detectedIssues: [],
-        recommendations: []
+        recommendations: [],
       };
-      
+
       if (legitimateData) {
         // URL is in our legitimate database
         return {
@@ -174,100 +204,107 @@ const URLAuthenticityChecker: React.FC = () => {
           confidence: legitimateData.confidence,
           riskScore: legitimateData.riskScore,
           threatLevel: legitimateData.threatLevel,
-          detectedIssues: domainAnalysis.suspicious ? domainAnalysis.reasons : [],
+          detectedIssues: domainAnalysis.suspicious
+            ? domainAnalysis.reasons
+            : [],
           securityAnalysis: {
             ...baseResult.securityAnalysis,
             databaseResult: {
               inDatabase: true,
               verified: true,
-              source: 'Legitimate URL Database'
-            }
+              source: "Legitimate URL Database",
+            },
           },
           technicalDetails: {
             ...baseResult.technicalDetails,
             domainAge: legitimateData.domainAge,
             registrar: legitimateData.registrar,
             location: legitimateData.location,
-            technologies: legitimateData.technologies
+            technologies: legitimateData.technologies,
           },
           legitimacyMarkers: legitimateData.legitimacyMarkers,
           contentQuality: legitimateData.contentQuality,
           recommendations: [
-            'URL is verified as legitimate',
-            'Always check the exact spelling of URLs',
-            'Look for HTTPS encryption',
-            'Bookmark legitimate sites to avoid typos'
-          ]
+            "URL is verified as legitimate",
+            "Always check the exact spelling of URLs",
+            "Look for HTTPS encryption",
+            "Bookmark legitimate sites to avoid typos",
+          ],
         };
       } else {
         // URL not in database - treat as potential phishing
         const phishingData = generatePhishingMetrics(processedUrl);
-        
+
         const detectedIssues = [
-          'URL not found in legitimate database',
-          'Potentially suspicious or unknown website',
-          ...domainAnalysis.reasons
+          "URL not found in legitimate database",
+          "Potentially suspicious or unknown website",
+          ...domainAnalysis.reasons,
         ];
-        
+
         if (!baseResult.securityAnalysis.sslCertificate.valid) {
-          detectedIssues.push('Missing or invalid SSL certificate');
+          detectedIssues.push("Missing or invalid SSL certificate");
         }
-        
+
         return {
           ...baseResult,
           isLegitimate: false,
           confidence: 95,
           riskScore: 85 + (domainAnalysis.suspicious ? 10 : 0),
-          threatLevel: 'critical' as const,
+          threatLevel: "critical" as const,
           detectedIssues,
           securityAnalysis: {
             ...baseResult.securityAnalysis,
             databaseResult: {
               inDatabase: false,
               verified: false,
-              source: 'Not in legitimate URL database'
-            }
+              source: "Not in legitimate URL database",
+            },
           },
           technicalDetails: {
             ...baseResult.technicalDetails,
             domainAge: phishingData.domainAge,
             registrar: phishingData.registrar,
             location: phishingData.location,
-            technologies: phishingData.technologies
+            technologies: phishingData.technologies,
           },
           contentQuality: phishingData.contentQuality,
           recommendations: [
-            'Exercise extreme caution with this URL',
-            'Do not enter personal or financial information',
-            'Verify the website through official channels',
-            'Consider using well-known, bookmarked sites instead',
-            'Report suspicious websites to authorities'
-          ]
+            "Exercise extreme caution with this URL",
+            "Do not enter personal or financial information",
+            "Verify the website through official channels",
+            "Consider using well-known, bookmarked sites instead",
+            "Report suspicious websites to authorities",
+          ],
         };
       }
-      
     } catch (error) {
-      console.error('Analysis failed:', error);
-      throw new Error(`Analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error("Analysis failed:", error);
+      throw new Error(
+        `Analysis failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
     }
   };
 
   const handleAnalyze = async () => {
     if (!url.trim()) return;
-    
+
     // Add to history
     if (!urlHistory.includes(url)) {
-      setUrlHistory(prev => [url, ...prev.slice(0, 4)]);
+      setUrlHistory((prev) => [url, ...prev.slice(0, 4)]);
     }
-    
+
     setIsAnalyzing(true);
-    setError('');
-    
+    setError("");
+
     try {
       const result = await analyzeURL(url);
       setAnalysisResult(result);
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Analysis failed. Please try again.');
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Analysis failed. Please try again.",
+      );
     } finally {
       setIsAnalyzing(false);
     }
@@ -276,25 +313,36 @@ const URLAuthenticityChecker: React.FC = () => {
   const handlePasteFromClipboard = async () => {
     try {
       const text = await navigator.clipboard.readText();
-      if (text.includes('.')) { // Basic check for URL-like content
+      if (text.includes(".")) {
+        // Basic check for URL-like content
         setUrl(text);
       }
     } catch (error) {
-      console.error('Failed to read clipboard:', error);
+      console.error("Failed to read clipboard:", error);
     }
   };
 
   const getThreatColor = (level: string) => {
     switch (level) {
-      case 'low': return 'text-green-600 bg-green-50';
-      case 'medium': return 'text-yellow-600 bg-yellow-50';
-      case 'high': return 'text-orange-600 bg-orange-50';
-      case 'critical': return 'text-red-600 bg-red-50';
-      default: return 'text-muted-foreground bg-muted';
+      case "low":
+        return "text-green-600 bg-green-50";
+      case "medium":
+        return "text-yellow-600 bg-yellow-50";
+      case "high":
+        return "text-orange-600 bg-orange-50";
+      case "critical":
+        return "text-red-600 bg-red-50";
+      default:
+        return "text-muted-foreground bg-muted";
     }
   };
 
-  const CircularProgress = ({ value, size = 80, strokeWidth = 6, color = 'blue' }: {
+  const CircularProgress = ({
+    value,
+    size = 80,
+    strokeWidth = 6,
+    color = "blue",
+  }: {
     value: number;
     size?: number;
     strokeWidth?: number;
@@ -303,13 +351,13 @@ const URLAuthenticityChecker: React.FC = () => {
     const radius = (size - strokeWidth) / 2;
     const circumference = radius * 2 * Math.PI;
     const offset = circumference - (value / 100) * circumference;
-    
+
     const colorClasses = {
-      blue: 'text-blue-500',
-      green: 'text-green-500',
-      red: 'text-red-500',
-      yellow: 'text-yellow-500',
-      orange: 'text-orange-500'
+      blue: "text-blue-500",
+      green: "text-green-500",
+      red: "text-red-500",
+      yellow: "text-yellow-500",
+      orange: "text-orange-500",
     };
 
     return (
@@ -375,7 +423,7 @@ const URLAuthenticityChecker: React.FC = () => {
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="example.com or https://example.com"
                   className="pl-11 pr-20 py-3 text-lg h-12"
-                  onKeyPress={(e) => e.key === 'Enter' && handleAnalyze()}
+                  onKeyPress={(e) => e.key === "Enter" && handleAnalyze()}
                 />
                 <button
                   onClick={handlePasteFromClipboard}
@@ -451,18 +499,18 @@ const URLAuthenticityChecker: React.FC = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <CircularProgress 
-                    value={analysisResult.confidence} 
-                    color={analysisResult.isLegitimate ? 'green' : 'red'}
+                  <CircularProgress
+                    value={analysisResult.confidence}
+                    color={analysisResult.isLegitimate ? "green" : "red"}
                     size={80}
                   />
                   <div>
-                    <Badge 
-                      variant="outline" 
+                    <Badge
+                      variant="outline"
                       className={`mb-2 text-base px-4 py-2 ${
-                        analysisResult.isLegitimate 
-                          ? 'text-green-600 bg-green-50 border-green-200'
-                          : 'text-red-600 bg-red-50 border-red-200'
+                        analysisResult.isLegitimate
+                          ? "text-green-600 bg-green-50 border-green-200"
+                          : "text-red-600 bg-red-50 border-red-200"
                       }`}
                     >
                       {analysisResult.isLegitimate ? (
@@ -470,16 +518,20 @@ const URLAuthenticityChecker: React.FC = () => {
                       ) : (
                         <AlertTriangle className="w-5 h-5 mr-2" />
                       )}
-                      {analysisResult.isLegitimate ? 'Verified Legitimate' : 'Potentially Dangerous'}
+                      {analysisResult.isLegitimate
+                        ? "Verified Legitimate"
+                        : "Potentially Dangerous"}
                     </Badge>
                     <p className="text-muted-foreground">
                       Confidence Level: {Math.round(analysisResult.confidence)}%
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="text-right">
-                  <div className="text-sm text-muted-foreground mb-1">Analyzed:</div>
+                  <div className="text-sm text-muted-foreground mb-1">
+                    Analyzed:
+                  </div>
                   <div className="text-sm font-medium text-foreground max-w-[300px] truncate">
                     {analysisResult.url}
                   </div>
@@ -501,23 +553,45 @@ const URLAuthenticityChecker: React.FC = () => {
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">In Database</span>
-                    <span className={`text-sm font-medium ${
-                      analysisResult?.securityAnalysis?.databaseResult?.inDatabase ? 'text-green-600' : 'text-red-600'
-                    }`}>
-                      {analysisResult?.securityAnalysis?.databaseResult?.inDatabase ? 'Yes' : 'No'}
+                    <span className="text-sm text-muted-foreground">
+                      In Database
+                    </span>
+                    <span
+                      className={`text-sm font-medium ${
+                        analysisResult?.securityAnalysis?.databaseResult
+                          ?.inDatabase
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }`}
+                    >
+                      {analysisResult?.securityAnalysis?.databaseResult
+                        ?.inDatabase
+                        ? "Yes"
+                        : "No"}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">Status</span>
-                    <span className={`text-sm font-medium ${
-                      analysisResult?.securityAnalysis?.databaseResult?.verified ? 'text-green-600' : 'text-red-600'
-                    }`}>
-                      {analysisResult?.securityAnalysis?.databaseResult?.verified ? 'Verified' : 'Unknown'}
+                    <span className="text-sm text-muted-foreground">
+                      Status
+                    </span>
+                    <span
+                      className={`text-sm font-medium ${
+                        analysisResult?.securityAnalysis?.databaseResult
+                          ?.verified
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }`}
+                    >
+                      {analysisResult?.securityAnalysis?.databaseResult
+                        ?.verified
+                        ? "Verified"
+                        : "Unknown"}
                     </span>
                   </div>
                   <div className="text-xs text-muted-foreground">
-                    Source: {analysisResult?.securityAnalysis?.databaseResult?.source || 'Unknown'}
+                    Source:{" "}
+                    {analysisResult?.securityAnalysis?.databaseResult?.source ||
+                      "Unknown"}
                   </div>
                 </div>
               </CardContent>
@@ -537,10 +611,13 @@ const URLAuthenticityChecker: React.FC = () => {
                     {analysisResult.contentQuality}%
                   </div>
                   <div className="w-full bg-muted rounded-full h-2 mb-2">
-                    <div 
+                    <div
                       className={`h-2 rounded-full ${
-                        analysisResult.contentQuality > 70 ? 'bg-green-500' : 
-                        analysisResult.contentQuality > 40 ? 'bg-yellow-500' : 'bg-red-500'
+                        analysisResult.contentQuality > 70
+                          ? "bg-green-500"
+                          : analysisResult.contentQuality > 40
+                            ? "bg-yellow-500"
+                            : "bg-red-500"
                       }`}
                       style={{ width: `${analysisResult.contentQuality}%` }}
                     />
@@ -562,7 +639,9 @@ const URLAuthenticityChecker: React.FC = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-center">
-                  <div className={`text-2xl font-bold mb-2 ${getThreatColor(analysisResult.threatLevel).split(' ')[0]}`}>
+                  <div
+                    className={`text-2xl font-bold mb-2 ${getThreatColor(analysisResult.threatLevel).split(" ")[0]}`}
+                  >
                     {analysisResult.threatLevel.toUpperCase()}
                   </div>
                   <div className="text-sm text-muted-foreground mb-3">
@@ -588,21 +667,29 @@ const URLAuthenticityChecker: React.FC = () => {
                   <div className="flex items-center gap-2 text-sm">
                     <Globe className="w-4 h-4 text-muted-foreground" />
                     <span className="text-muted-foreground">Domain:</span>
-                    <span className="text-foreground font-medium text-xs">{analysisResult.technicalDetails.domain}</span>
+                    <span className="text-foreground font-medium text-xs">
+                      {analysisResult.technicalDetails.domain}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <Lock className="w-4 h-4 text-muted-foreground" />
                     <span className="text-muted-foreground">Protocol:</span>
-                    <span className={`text-sm font-medium ${
-                      analysisResult.technicalDetails.protocol === 'https:' ? 'text-green-600' : 'text-red-600'
-                    }`}>
+                    <span
+                      className={`text-sm font-medium ${
+                        analysisResult.technicalDetails.protocol === "https:"
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }`}
+                    >
                       {analysisResult.technicalDetails.protocol}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <Clock className="w-4 h-4 text-muted-foreground" />
                     <span className="text-muted-foreground">Age:</span>
-                    <span className="text-foreground font-medium text-xs">{analysisResult.technicalDetails.domainAge}</span>
+                    <span className="text-foreground font-medium text-xs">
+                      {analysisResult.technicalDetails.domainAge}
+                    </span>
                   </div>
                 </div>
               </CardContent>
@@ -617,21 +704,32 @@ const URLAuthenticityChecker: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-lg">
                     <AlertCircle className="w-5 h-5 text-red-600" />
-                    {analysisResult.isLegitimate ? 'Notes' : 'Security Issues'}
+                    {analysisResult.isLegitimate ? "Notes" : "Security Issues"}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    {analysisResult.detectedIssues.slice(0, 4).map((issue, index) => (
-                      <div key={index} className={`flex items-start gap-3 p-2 rounded-lg ${
-                        analysisResult.isLegitimate ? 'bg-blue-50' : 'bg-red-50'
-                      }`}>
-                        <AlertTriangle className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
-                          analysisResult.isLegitimate ? 'text-blue-600' : 'text-red-600'
-                        }`} />
-                        <span className="text-sm text-black">{issue}</span>
-                      </div>
-                    ))}
+                    {analysisResult.detectedIssues
+                      .slice(0, 4)
+                      .map((issue, index) => (
+                        <div
+                          key={index}
+                          className={`flex items-start gap-3 p-2 rounded-lg ${
+                            analysisResult.isLegitimate
+                              ? "bg-blue-50"
+                              : "bg-red-50"
+                          }`}
+                        >
+                          <AlertTriangle
+                            className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
+                              analysisResult.isLegitimate
+                                ? "text-blue-600"
+                                : "text-red-600"
+                            }`}
+                          />
+                          <span className="text-sm text-black">{issue}</span>
+                        </div>
+                      ))}
                   </div>
                 </CardContent>
               </Card>
@@ -647,38 +745,49 @@ const URLAuthenticityChecker: React.FC = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {analysisResult.recommendations.slice(0, 4).map((rec, index) => (
-                    <div key={index} className="flex items-start gap-3 p-2 bg-blue-50 rounded-lg">
-                      <Info className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-black">{rec}</span>
-                    </div>
-                  ))}
+                  {analysisResult.recommendations
+                    .slice(0, 4)
+                    .map((rec, index) => (
+                      <div
+                        key={index}
+                        className="flex items-start gap-3 p-2 bg-blue-50 rounded-lg"
+                      >
+                        <Info className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm text-black">{rec}</span>
+                      </div>
+                    ))}
                 </div>
               </CardContent>
             </Card>
           </div>
 
           {/* Legitimacy Markers (only show for legitimate URLs) */}
-          {analysisResult.isLegitimate && analysisResult.legitimacyMarkers.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  Legitimacy Markers
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-2">
-                  {analysisResult.legitimacyMarkers.map((marker, index) => (
-                    <div key={index} className="flex items-center gap-3 p-2 bg-green-50 rounded-lg">
-                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
-                      <span className="text-sm text-foreground">{marker}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          )}
+          {analysisResult.isLegitimate &&
+            analysisResult.legitimacyMarkers.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    Legitimacy Markers
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid md:grid-cols-2 gap-2">
+                    {analysisResult.legitimacyMarkers.map((marker, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-3 p-2 bg-green-50 rounded-lg"
+                      >
+                        <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                        <span className="text-sm text-foreground">
+                          {marker}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
         </div>
       )}
     </div>
