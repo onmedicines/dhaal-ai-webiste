@@ -13,7 +13,7 @@ const cases = [
   },
   {
     img: "/fakevideo.mp4",
-    isDeepfake: false,
+    isDeepfake: true,
     mediaType: "video",
     videoSrc: "/fakevideo.mp4",
   },
@@ -266,13 +266,13 @@ function CaseItem({
           {/* Play Button - Only shows on hover */}
           {(caseData.mediaType === "audio" ||
             caseData.mediaType === "video") && (
-            <div className="absolute inset-0 flex items-center justify-center z-30">
+            <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
               <div className="w-24 h-24 rounded-full flex items-center justify-center">
                 <AnimatePresence>
                   {shouldShowPlayButton && (
                     <motion.button
                       onClick={handlePlayPause}
-                      className="w-20 h-20 group"
+                      className="w-20 h-20 group pointer-events-auto"
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
@@ -374,12 +374,6 @@ export default function RealCasesSection() {
   const [activePlayingIndex, setActivePlayingIndex] = useState<number | null>(
     null,
   );
-  const [submittedUrl, setSubmittedUrl] = useState("");
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [submissionSuccess, setSubmissionSuccess] = useState<string | null>(
-    null,
-  );
-  const [isSubmitting, setIsSubmitting] = useState(false); // Add this line
 
   const handleInView = (index: number) => {
     if (index !== active) {
@@ -395,57 +389,47 @@ export default function RealCasesSection() {
     }
   };
 
-  const handleSubmitUrl = () => {
-    if (submittedUrl.trim()) {
-      // Disable the button and show loading state
-      setIsSubmitting(true);
-
-      // Add 1-second delay before submission
-      setTimeout(() => {
-        setSubmissionSuccess(submittedUrl);
-        setShowSuccessMessage(true);
-        setSubmittedUrl("");
-        setIsSubmitting(false);
-
-        // Hide success message after 1 second
-        setTimeout(() => {
-          setShowSuccessMessage(false);
-          setSubmittedUrl("");
-        }, 1000);
-      }, 1000); // 1-second delay before submission
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleSubmitUrl();
-    }
-  };
-
   return (
     <section id="cases" className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-[1fr_2fr] gap-10">
-          <div className="lg:sticky lg:top-24 self-start space-y-6 max-w-md pt-20">
-            <div>
-              <h2 className="text-3xl font-bold mb-2 text-center sm:text-left">
-                Can you spot a{" "}
-                <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-                  Deepfake?
-                </span>
-              </h2>
-              <p className="font-semibold text-muted-foreground">
-                Turn on your audio, play the media, and decide whether it&apos;s
-                real or fake.
-              </p>
-              <ol className="list-decimal list-inside text-muted-foreground space-y-1">
-                <li>Turn up your volume</li>
-                <li>Watch/listen closely</li>
-                <li>Choose wisely</li>
-              </ol>
-            </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold mb-4">
+            Test Your{" "}
+            <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
+              Detection
+            </span>{" "}
+            Skills
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            Challenge yourself with real examples. Can you tell what&apos;s real
+            and what&apos;s not?
+          </p>
+        </motion.div>
 
-            <div className="p-6 border border-pink-300 rounded-lg bg-pink-50 dark:bg-pink-900/10 text-sm space-y-4 mt-24">
+        <div className="lg:grid lg:grid-cols-[1fr_2fr] gap-10">
+          <div className="lg:sticky lg:top-24 self-start space-y-6 max-w-md">
+            <h2 className="text-3xl font-bold mb-2">
+              Can you spot a{" "}
+              <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
+                Deepfake?
+              </span>
+            </h2>
+            <p className="font-semibold text-muted-foreground">
+              Turn on your audio, play the media, and decide whether it&apos;s
+              real or fake.
+            </p>
+            <ol className="list-decimal list-inside text-muted-foreground space-y-1">
+              <li>Turn up your volume</li>
+              <li>Watch/listen closely</li>
+              <li>Choose wisely</li>
+            </ol>
+
+            <div className="p-6 border border-pink-300 rounded-lg bg-pink-50 dark:bg-pink-900/10 text-sm space-y-4">
               <h3 className="text-lg font-semibold text-red-600">
                 Share a deepfake you&apos;ve found
               </h3>
@@ -457,64 +441,25 @@ export default function RealCasesSection() {
                 <input
                   type="url"
                   placeholder="Paste deepfake URL"
-                  value={submittedUrl}
-                  onChange={(e) => setSubmittedUrl(e.target.value)}
-                  onKeyPress={handleKeyPress}
                   className="flex-1 px-3 py-2 border rounded"
                 />
-                <button
-                  className={`px-4 py-2 rounded transition ${
-                    isSubmitting
-                      ? "bg-gray-400 text-white cursor-not-allowed"
-                      : "bg-black text-white hover:bg-gray-800"
-                  }`}
-                  onClick={handleSubmitUrl}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Submitting..." : "Submit"}
+                <button className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">
+                  Submit
                 </button>
               </div>
-
-              {/* Success Message */}
-              <AnimatePresence>
-                {showSuccessMessage && submissionSuccess && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="p-3 bg-green-100 border border-green-300 rounded text-green-800 text-sm"
-                  >
-                    <div className="flex items-center gap-2">
-                      <svg
-                        className="w-4 h-4 text-green-600"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <span className="font-medium">{submissionSuccess}</span>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
               <p className="text-xs text-muted-foreground">
                 We won&apos;t store any personal data.{" "}
-                <a href="/privacy_policy" className="underline">
+                <a href="#" className="underline">
                   Privacy Policy
                 </a>
               </p>
             </div>
           </div>
 
-          <div className="lg:block overflow-x-auto flex lg:flex-col gap-6 snap-x snap-mandatory scroll-smooth no-scrollbar px-4 -mx-4 touch-pan-x">
+          {/* Fixed mobile scrolling container */}
+          <div className="lg:block space-y-6">
             {cases.map((caseData, idx) => (
-              <div key={idx} className="snap-center shrink-0 w-full lg:w-auto">
+              <div key={idx} className="w-full">
                 <CaseItem
                   caseData={caseData}
                   index={idx}
