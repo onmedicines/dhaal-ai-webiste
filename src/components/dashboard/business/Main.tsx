@@ -98,7 +98,7 @@ function DashboardHeader() {
 // Stats data configuration
 const statsConfig = [
   {
-    title: "Total Scans Today",
+    title: "Total Deepfakes",
     value: dashboardStats.totalScansToday.value,
     change: dashboardStats.totalScansToday.change,
     icon: <Search className="h-4 w-4 text-muted-foreground" />,
