@@ -5,8 +5,8 @@ import RealCasesSection from "@/components/home/real-cases";
 import ProtectionSection from "@/components/home/protection";
 import CTASection from "@/components/home/cta";
 import HomePageHeader from "@/components/home/home-page-header";
-// import RealCasesSectionMobile from "@/components/home/real-cases-mobile";
 import Footer from "@/components/global/footer";
+import ImageDeepfakeChecker from "@/components/home/check-deepfake";
 
 export default function Home() {
   return (
@@ -15,13 +15,9 @@ export default function Home() {
         <HomePageHeader />
         <HeroSection />
         <AboutDeepfake />
+        <ImageDeepfakeChecker />
         <ThreatCarousel />
-        {/*<div className="hidden md:block">*/}
         <RealCasesSection />
-        {/*</div>*/}
-        {/*<div className="md:hidden">
-          <RealCasesSectionMobile />
-        </div>*/}
         <ProtectionSection />
         <CTASection />
       </div>
