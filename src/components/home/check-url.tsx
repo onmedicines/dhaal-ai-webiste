@@ -5,14 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Spinner from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
-import {
-  Link,
-  Search,
-  CheckCircle,
-  AlertCircle,
-  ExternalLink,
-  ServerCrash,
-} from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 // Define the structure of the API response
 interface UrlStatusResponse {
@@ -89,7 +82,7 @@ export default function CheckUrlStatus() {
   };
 
   return (
-    <section className="min-h-screen w-full flex items-center justify-center bg-background">
+    <section className="w-full flex items-center justify-center bg-background">
       <div className="w-full max-w-6xl p-6">
         {/* Heading */}
         <div className="text-center mb-8">
