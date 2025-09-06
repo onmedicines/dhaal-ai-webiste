@@ -25,13 +25,13 @@ const URLAuthenticityChecker: React.FC = () => {
         {/* Right: Nav Links (dummy) */}
         <nav className="flex items-center gap-6 text-sm">
           <Link
-            href="/scan"
+            href="/dashboard/url-scanning/scan"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
             Scan
           </Link>
           <Link
-            href="/detailed-analysis"
+            href="/dashboard/url-scanning/detailed-analysis"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
             Detailed Analysis
