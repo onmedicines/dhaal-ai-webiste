@@ -47,8 +47,9 @@ export interface MediaTypeDetection {
 }
 
 export interface ThreatDistribution {
-  deepfake: number;
-  tampering: number;
+  // deepfake: number;
+  // tampering: number;
+  malicious: number,
   clean: number;
 }
 
@@ -162,9 +163,8 @@ export const mediaTypeDetections: MediaTypeDetection[] = [
 ];
 
 export const threatDistribution: ThreatDistribution = {
-  deepfake: 35,
-  tampering: 25,
-  clean: 40,
+  malicious: 30,
+  clean: 70,
 };
 
 export const systemStatus: SystemStatus = {

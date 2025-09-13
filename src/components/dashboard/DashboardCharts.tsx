@@ -99,12 +99,12 @@ export default function DashboardCharts({
 
   // Transform data for pie chart
   const pieChartData = [
-    { name: "Deepfake", value: threatDistribution.deepfake, color: "#ef4444" },
-    {
-      name: "Tampering",
-      value: threatDistribution.tampering,
-      color: "#f59e0b",
-    },
+    { name: "Malicious", value: threatDistribution.malicious, color: "#ef4444" },
+    // {
+    //   name: "Tampering",
+    //   value: threatDistribution.tampering,
+    //   color: "#f59e0b",
+    // },
     { name: "Clean", value: threatDistribution.clean, color: "#10b981" },
   ];
 
@@ -135,8 +135,10 @@ export default function DashboardCharts({
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
               <XAxis
                 dataKey="name"
-                className="text-muted-foreground"
-                fontSize={12}
+                // className="text-muted-foreground"
+                // fontSize={12}
+                tick={false}
+                axisLine={false}
               />
               <YAxis className="text-muted-foreground" fontSize={12} />
               <Tooltip content={<CustomTooltip />} />
