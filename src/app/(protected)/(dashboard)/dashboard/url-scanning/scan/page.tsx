@@ -222,7 +222,7 @@ const URLAnalysisDemo: React.FC = () => {
                   {(analysisResult.confidence * 100).toFixed(2)}%
                 </span>
               </div>
-              <div>
+              {/* <div>
                 <span className="block text-muted-foreground">Probability</span>
                 <span className="font-medium">
                   {(analysisResult.probability * 100).toFixed(2)}%
@@ -233,7 +233,7 @@ const URLAnalysisDemo: React.FC = () => {
                 <span className="font-medium">
                   {(analysisResult.threshold * 100).toFixed(2)}%
                 </span>
-              </div>
+              </div> */}
               <div>
                 <span className="block text-muted-foreground">Status</span>
                 <span className="font-medium">{analysisResult.status}</span>
