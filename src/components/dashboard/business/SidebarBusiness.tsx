@@ -18,6 +18,7 @@ import {
   ChevronLeft,
   ChevronDown,
   LucideIcon,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import * as Accordion from "@radix-ui/react-accordion";
@@ -149,7 +150,7 @@ const UrlScanningDropdown = () => {
                 "hover:bg-accent hover:text-accent-foreground"
               )}
             >
-              <ChevronDown className="h-4 w-4" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="right" align="start" className="w-56">
