@@ -9,7 +9,7 @@ import {
   BarChart3,
   Search,
   Lock,
-  DollarSign,
+  // DollarSign,
   FileText,
   FileSearch,
   Phone,
@@ -19,7 +19,8 @@ import {
   ChevronDown,
   LucideIcon,
   ChevronRight,
-  Mail
+  Mail,
+  IndianRupee
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import * as Accordion from "@radix-ui/react-accordion";
@@ -58,7 +59,7 @@ const securityPlugins = [
 ];
 
 const financeItems = [
-  { name: "Wealth Analyzer", href: "/dashboard/wealth-analyzer", icon: DollarSign as LucideIcon },
+  { name: "Wealth Analyzer", href: "/dashboard/wealth-analyzer", icon: IndianRupee as LucideIcon },
   { name: "Plan Details", href: "/dashboard/plan-details", icon: FileText as LucideIcon },
 ];
 

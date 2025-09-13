@@ -10,7 +10,8 @@ import {
   Mail,
   User,
   Building2,
-  DollarSign,
+  // DollarSign,
+  IndianRupee,
   TrendingUp,
   Lock,
   Heart,
@@ -161,7 +162,7 @@ const InsuranceTrackingDashboard: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
-                <DollarSign className="w-5 h-5 text-green-600" />
+                <IndianRupee className="w-5 h-5 text-green-600" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Total Premium</p>
