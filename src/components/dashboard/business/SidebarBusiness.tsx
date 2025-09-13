@@ -19,6 +19,7 @@ import {
   ChevronDown,
   LucideIcon,
   ChevronRight,
+  Mail
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import * as Accordion from "@radix-ui/react-accordion";
@@ -64,6 +65,7 @@ const financeItems = [
 const sdkApiProvidersBase = [
   { name: "Text Analysis", href: "/dashboard/text-analysis", icon: FileSearch as LucideIcon },
   { name: "Call Analysis", href: "/dashboard/call-analysis", icon: Phone as LucideIcon },
+  { name: "Email Analysis", href: "/dashboard/email-analysis", icon: Mail as LucideIcon },
   // URL Scanning will be handled separately to attach a dropdown trigger
 ];
 
