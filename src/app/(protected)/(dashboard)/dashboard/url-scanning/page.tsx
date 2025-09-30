@@ -36,18 +36,6 @@ const URLAuthenticityChecker: React.FC = () => {
           >
             Detailed Analysis
           </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Guides
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Changelog
-          </Link>
         </nav>
       </header>
 
