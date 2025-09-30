@@ -38,7 +38,7 @@ export default function DashboardLayout({
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          },
+          }
         );
 
         if (!response.ok) {
@@ -80,7 +80,7 @@ export default function DashboardLayout({
       } catch (error) {
         console.error("Error fetching user data:", error);
         setError(
-          error instanceof Error ? error.message : "Failed to load user data",
+          error instanceof Error ? error.message : "Failed to load user data"
         );
 
         // If it's an authentication error, redirect to login
