@@ -9,7 +9,7 @@ import { RefreshCw, Search, CheckCircle, AlertTriangle } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 interface ApiResponse {
-  prediction: "ham" | "spam";
+  prediction: "spam" | "benign";
   confidence: number;
   explanation: string;
   model_used: string;
@@ -30,12 +30,12 @@ const EmailSpamDetector: React.FC = () => {
 
     try {
       const response = await fetch(
-        "https://anutri03-email-spam-api.hf.space/predict",
+        `${process.env.NEXT_PUBLIC_API_URL}/detection/email`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ text: emailText }),
-        },
+        }
       );
 
       if (!response.ok) throw new Error(`API error: ${response.status}`);
@@ -51,17 +51,16 @@ const EmailSpamDetector: React.FC = () => {
 
   const getPredictionBar = (prediction: string, confidence: number) => {
     const percent = (confidence * 100).toFixed(2);
+    const isBenign = prediction === "benign";
     return (
       <div className="space-y-2">
         <div className="flex justify-between text-sm font-medium">
-          <span>{prediction === "ham" ? "Ham" : "Spam"}</span>
+          <span>{isBenign ? "Benign" : "Spam"}</span>
           <span>{percent}%</span>
         </div>
         <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
           <div
-            className={`h-2 ${
-              prediction === "ham" ? "bg-green-500" : "bg-red-500"
-            }`}
+            className={`h-2 ${isBenign ? "bg-green-500" : "bg-red-500"}`}
             style={{ width: `${percent}%` }}
           />
         </div>
@@ -122,12 +121,12 @@ const EmailSpamDetector: React.FC = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center gap-2 text-lg font-semibold">
-              {result.prediction === "ham" ? (
+              {result.prediction === "benign" ? (
                 <CheckCircle className="w-6 h-6 text-green-600" />
               ) : (
                 <AlertTriangle className="w-6 h-6 text-red-600" />
               )}
-              {result.prediction === "ham" ? "Safe" : "Spam"}
+              {result.prediction === "benign" ? "Benign" : "Spam"}
             </div>
 
             {getPredictionBar(result.prediction, result.confidence)}
@@ -135,7 +134,6 @@ const EmailSpamDetector: React.FC = () => {
             <div className="prose prose-sm max-w-none">
               <ReactMarkdown>{result.explanation}</ReactMarkdown>
             </div>
-
             <div className="text-xs text-muted-foreground">
               Model used: {result.model_used}
             </div>
