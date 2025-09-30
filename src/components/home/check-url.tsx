@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+// import { Separator } from "@/components/ui/separator";
 import Spinner from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
 import { ExternalLink } from "lucide-react";
@@ -39,20 +39,20 @@ interface UrlAssessmentResponse {
   finalUrl?: string | null;
 }
 
-const resultColor = (label: string) => {
-  const benign = label.toLowerCase() === "benign";
-  return benign ? "text-green-600" : "text-red-600";
-};
+// const resultColor = (label: string) => {
+//   const benign = label.toLowerCase() === "benign";
+//   return benign ? "text-green-600" : "text-red-600";
+// };
 
-const barColor = (label: string) => {
-  const benign = label.toLowerCase() === "benign";
-  return benign ? "bg-green-500" : "bg-red-500";
-};
+// const barColor = (label: string) => {
+//   const benign = label.toLowerCase() === "benign";
+//   return benign ? "bg-green-500" : "bg-red-500";
+// };
 
-const labelFromAssessment = (label: string) => {
-  const benign = label.toLowerCase() === "benign";
-  return benign ? "Online & Benign" : "Potentially Malicious";
-};
+// const labelFromAssessment = (label: string) => {
+//   const benign = label.toLowerCase() === "benign";
+//   return benign ? "Online & Benign" : "Potentially Malicious";
+// };
 
 export default function CheckUrlStatus() {
   const [url, setUrl] = useState("");
