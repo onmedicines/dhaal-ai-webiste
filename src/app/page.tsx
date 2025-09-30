@@ -8,6 +8,7 @@ import HomePageHeader from "@/components/home/home-page-header";
 import Footer from "@/components/global/footer";
 import ImageDeepfakeChecker from "@/components/home/check-deepfake";
 import CheckUrl from "@/components/home/check-url";
+import CheckEmailStatus from "@/components/home/check-email";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <AboutDeepfake />
         <ImageDeepfakeChecker />
         <CheckUrl />
+        <CheckEmailStatus />
         <ThreatCarousel />
         <RealCasesSection />
         <ProtectionSection />
