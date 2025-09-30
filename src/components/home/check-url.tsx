@@ -7,32 +7,58 @@ import Spinner from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
 import { ExternalLink } from "lucide-react";
 
-// Define the structure of the API response
-interface UrlStatusResponse {
-  exists: boolean;
-  finalUrl: string | null;
-  status: number | null;
-  message: string;
+interface GsbResponse {
+  malicious: boolean;
+  matches: string[];
+  status: "ok" | "error";
 }
 
-// Result styling helpers
-const resultColor = (exists: boolean) => {
-  return exists ? "text-green-600" : "text-red-600";
+interface VtResponse {
+  is_malicious: boolean;
+  malicious_count: number;
+  status: "ok" | "error";
+  suspicious_count: number;
+  threat_score: number;
+  total_engines: number;
+}
+
+interface UrlAssessmentResponse {
+  api_score: number;
+  combined_probability: number;
+  elapsed_seconds: number;
+  gsb_response: GsbResponse;
+  label: "benign" | "malicious" | string;
+  ml_probability: number;
+  rule_score: number;
+  threshold_used: number;
+  url: string;
+  vt_response: VtResponse;
+  // Optional fallback fields if backend sometimes includes legacy fields
+  message?: string;
+  status?: number | null;
+  finalUrl?: string | null;
+}
+
+const resultColor = (label: string) => {
+  const benign = label.toLowerCase() === "benign";
+  return benign ? "text-green-600" : "text-red-600";
 };
 
-const barColor = (exists: boolean) => {
-  return exists ? "bg-green-500" : "bg-red-500";
+const barColor = (label: string) => {
+  const benign = label.toLowerCase() === "benign";
+  return benign ? "bg-green-500" : "bg-red-500";
 };
 
-const labelFromStatus = (exists: boolean) => {
-  return exists ? "Online & Reachable" : "Potentially Fake";
+const labelFromAssessment = (label: string) => {
+  const benign = label.toLowerCase() === "benign";
+  return benign ? "Online & Benign" : "Potentially Malicious";
 };
 
 export default function CheckUrlStatus() {
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [response, setResponse] = useState<UrlStatusResponse | null>(null);
-  const [error, setError] = useState<string>("");
+  const [response, setResponse] = useState<UrlAssessmentResponse | null>(null);
+  const [error, setError] = useState("");
 
   const handleCheckUrl = async () => {
     if (!url.trim()) {
@@ -46,20 +72,19 @@ export default function CheckUrlStatus() {
 
     try {
       const apiResponse = await fetch(
-        "https://dhaal-ai-backend.onrender.com/api/detection/url",
+        `${process.env.NEXT_PUBLIC_API_URL}/detection/url`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ url }),
-        },
+        }
       );
 
-      const data: UrlStatusResponse = await apiResponse.json();
-
+      const data: UrlAssessmentResponse = await apiResponse.json();
       if (!apiResponse.ok) {
-        throw new Error(data.message || "An unknown error occurred.");
+        const msg =
+          data?.message || `Request failed with status ${apiResponse.status}`;
+        throw new Error(msg);
       }
 
       setResponse(data);
@@ -82,133 +107,111 @@ export default function CheckUrlStatus() {
   };
 
   return (
-    <section className="w-full flex items-center justify-center bg-background">
-      <div className="w-full max-w-6xl p-6">
-        {/* Heading */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-3 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            Check URL Status
-          </h1>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-            Enter a URL to verify if it is online, reachable, and not leading to
-            a dead end.
-          </p>
+    <div className="w-full max-w-5xl mx-auto p-6">
+      {/* Heading */}
+      <div className="mb-6 text-center">
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-3 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          Check URL Status
+        </h2>
+        <p className="text-muted-foreground max-w-xl mx-auto text-lg">
+          Enter a URL to assess risk with combined ML, rules, VT, and GSB
+          signals.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Left: Input + Actions */}
+        <div className="space-y-3">
+          <label className="text-sm font-medium">Enter URL</label>
+          <div className="flex gap-2">
+            <Input
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder="https://example.com"
+              disabled={isLoading}
+              onKeyDown={(e) => e.key === "Enter" && handleCheckUrl()}
+            />
+            <Button onClick={handleCheckUrl} disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <Spinner className="mr-2 h-4 w-4" />
+                  Checking…
+                </>
+              ) : (
+                "Check URL"
+              )}
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={resetChecker}
+              disabled={isLoading}
+            >
+              Clear
+            </Button>
+          </div>
+
+          {error ? (
+            <div className="text-red-600 text-sm" role="alert">
+              {error}
+            </div>
+          ) : null}
+
+          {response?.url ? (
+            <a
+              href={response.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-sm text-blue-600 hover:underline"
+            >
+              Open submitted URL <ExternalLink className="ml-1 h-4 w-4" />
+            </a>
+          ) : null}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Left: Input + Actions */}
-          <div>
-            <div className="border rounded-lg p-6 bg-muted/20 space-y-4">
-              <label htmlFor="url-input" className="font-medium">
-                Enter URL
-              </label>
-              <Input
-                id="url-input"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                placeholder="https://example.com"
-                disabled={isLoading}
-                onKeyPress={(e) => e.key === "Enter" && handleCheckUrl()}
-              />
+        {/* Right: Results Panel */}
+        <div className="border rounded-md p-4 min-h-[160px]">
+          {isLoading ? (
+            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+              <Spinner className="h-4 w-4" />
+              Checking URL status…
             </div>
-            <div className="mt-4 flex gap-3">
-              <Button
-                className="flex-1"
-                onClick={handleCheckUrl}
-                disabled={isLoading || !url.trim()}
+          ) : response ? (
+            <div className="space-y-4">
+              {/* Big label */}
+              <div
+                className={
+                  (response.label?.toLowerCase() === "benign"
+                    ? "text-green-600"
+                    : "text-red-600") + " text-3xl font-semibold"
+                }
               >
-                {isLoading ? "Checking…" : "Check URL"}
-              </Button>
-              <Button variant="outline" onClick={resetChecker}>
-                Clear
-              </Button>
+                {response.label}
+              </div>
+
+              <div className="space-y-3 text-sm">
+                <div>
+                  <div className="text-muted-foreground">URL</div>
+                  <div className="break-all">{response.url}</div>
+                </div>
+                <div>
+                  <div className="text-muted-foreground">
+                    Google Safe Browsing
+                  </div>
+                  <div>{response.gsb_response?.status ?? "unknown"}</div>
+                </div>
+                <div>
+                  <div className="text-muted-foreground">VirusTotal</div>
+                  <div>{response.vt_response?.status ?? "unknown"}</div>
+                </div>
+              </div>
             </div>
-            {error ? (
-              <p className="mt-3 text-sm text-red-600">{error}</p>
-            ) : null}
-          </div>
-
-          {/* Right: Results Panel */}
-          <div className="border rounded-lg p-4 flex items-center justify-center min-h-[180px] max-h-full">
-            {isLoading ? (
-              <div className="flex flex-col items-center gap-3">
-                <Spinner height="h-8" />
-                <p className="text-sm text-muted-foreground">
-                  Checking URL status…
-                </p>
-              </div>
-            ) : response ? (
-              <div className="w-full">
-                <h2
-                  className={`text-xl font-semibold ${resultColor(response.exists)}`}
-                >
-                  {labelFromStatus(response.exists)}
-                </h2>
-                <Separator className="my-4" />
-
-                {/* Status Bar */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">
-                      Reachability
-                    </span>
-                    <span
-                      className={`text-sm font-medium ${resultColor(response.exists)}`}
-                    >
-                      {response.exists ? "100%" : "0%"}
-                    </span>
-                  </div>
-                  <div className="w-full h-2 rounded-full bg-muted">
-                    <div
-                      className={`h-2 rounded-full ${barColor(response.exists)}`}
-                      style={{
-                        width: `${response.exists ? 100 : 0}%`,
-                        transition: "width 400ms ease",
-                      }}
-                    />
-                  </div>
-                </div>
-
-                {/* Details */}
-                <div className="mt-4 space-y-2 text-xs text-muted-foreground">
-                  <div className="flex items-center justify-between">
-                    <span>Message:</span>
-                    <span className="text-right ml-2">
-                      {response.status == 200
-                        ? response.message
-                        : 'Failed to connect to "dhaal.oo" on any known protocol. The domain may be fake.'}
-                    </span>
-                  </div>
-                  {response.finalUrl && (
-                    <div className="flex items-center justify-between">
-                      <span>Final URL:</span>
-                      <a
-                        href={response.finalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-blue-500 hover:underline"
-                      >
-                        {response.finalUrl}
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-                    </div>
-                  )}
-                  {response.status && (
-                    <div className="flex items-center justify-between">
-                      <span>HTTP Status:</span>
-                      <span>{response.status}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground text-center">
-                Enter a URL and click “Check URL” to see its status.
-              </p>
-            )}
-          </div>
+          ) : (
+            <div className="text-sm text-muted-foreground">
+              Enter a URL and click “Check URL” to see its status.
+            </div>
+          )}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
