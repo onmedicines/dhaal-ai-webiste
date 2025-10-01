@@ -70,7 +70,7 @@ export default function CheckEmailStatus() {
     setIsLoading(false);
   };
 
-  const isBenign = (response?.prediction ?? "").toLowerCase() === "benign";
+  const isBenign = (response?.prediction ?? "").toLowerCase() === "ham";
 
   return (
     <div className="w-full max-w-5xl mx-auto px-6 pt-10">
