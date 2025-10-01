@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-// import { Separator } from "@/components/ui/separator";
 import Spinner from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
 import { ExternalLink } from "lucide-react";
@@ -33,26 +32,24 @@ interface UrlAssessmentResponse {
   threshold_used: number;
   url: string;
   vt_response: VtResponse;
-  // Optional fallback fields if backend sometimes includes legacy fields
   message?: string;
   status?: number | null;
   finalUrl?: string | null;
 }
 
-// const resultColor = (label: string) => {
-//   const benign = label.toLowerCase() === "benign";
-//   return benign ? "text-green-600" : "text-red-600";
-// };
+// Validation function using URL constructor
+function isValidHttpUrl(url: string): boolean {
+  if (!url || typeof url !== "string") {
+    return false;
+  }
 
-// const barColor = (label: string) => {
-//   const benign = label.toLowerCase() === "benign";
-//   return benign ? "bg-green-500" : "bg-red-500";
-// };
-
-// const labelFromAssessment = (label: string) => {
-//   const benign = label.toLowerCase() === "benign";
-//   return benign ? "Online & Benign" : "Potentially Malicious";
-// };
+  try {
+    const urlObj = new URL(url);
+    return urlObj.protocol === "http:" || urlObj.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
 
 export default function CheckUrlStatus() {
   const [url, setUrl] = useState("");
@@ -61,8 +58,15 @@ export default function CheckUrlStatus() {
   const [error, setError] = useState("");
 
   const handleCheckUrl = async () => {
+    // Validate URL is not empty
     if (!url.trim()) {
       setError("Please enter a URL.");
+      return;
+    }
+
+    // Validate URL format and protocol
+    if (!isValidHttpUrl(url.trim())) {
+      setError("Please enter a valid URL starting with http:// or https://");
       return;
     }
 
@@ -76,7 +80,7 @@ export default function CheckUrlStatus() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url }),
+          body: JSON.stringify({ url: url.trim() }),
         }
       );
 
@@ -185,7 +189,7 @@ export default function CheckUrlStatus() {
                     : "text-red-600") + " text-3xl font-semibold"
                 }
               >
-                {response.label === "benign" ? "safe" : response.label}
+                {response.label === "benign" ? "Safe" : response.label}
               </div>
 
               <div className="space-y-3 text-sm">
@@ -207,7 +211,7 @@ export default function CheckUrlStatus() {
             </div>
           ) : (
             <div className="text-sm text-muted-foreground">
-              Enter a URL and click “Check URL” to see its status.
+              Enter a URL and click &quot;Check URL&quot; to see its status.
             </div>
           )}
         </div>
