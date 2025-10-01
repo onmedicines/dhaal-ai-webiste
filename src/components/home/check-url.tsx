@@ -185,7 +185,7 @@ export default function CheckUrlStatus() {
                     : "text-red-600") + " text-3xl font-semibold"
                 }
               >
-                {response.label}
+                {response.label === "benign" ? "safe" : response.label}
               </div>
 
               <div className="space-y-3 text-sm">

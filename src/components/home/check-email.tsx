@@ -145,10 +145,10 @@ export default function CheckEmailStatus() {
               <div
                 className={
                   (isBenign ? "text-green-600" : "text-red-600") +
-                  " text-3xl font-semibold text-center"
+                  " text-3xl font-semibold"
                 }
               >
-                {response.prediction}
+                {response.prediction === "ham" ? "safe" : response.prediction}
               </div>
 
               <div className="grid grid-cols-2 gap-3 text-sm">
