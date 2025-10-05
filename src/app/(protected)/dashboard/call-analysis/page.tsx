@@ -454,7 +454,7 @@ const CallAnalysisSDK: React.FC = () => {
                         {analysisResult.sentiment.overall.toUpperCase()}
                         <span className="ml-2 text-muted-foreground">
                           {Math.round(
-                            analysisResult.sentiment.confidence * 100,
+                            analysisResult.sentiment.confidence * 100
                           )}
                           % confidence
                         </span>
@@ -543,7 +543,9 @@ const CallAnalysisSDK: React.FC = () => {
                     {analysisResult.securityAlerts.map((alert, i) => (
                       <div
                         key={i}
-                        className={`p-3 rounded-lg flex items-center gap-3 ${getSeverityColor(alert.severity)}`}
+                        className={`p-3 rounded-lg flex items-center gap-3 ${getSeverityColor(
+                          alert.severity
+                        )}`}
                       >
                         <AlertTriangle className="w-5 h-5 flex-shrink-0" />
                         <div>
