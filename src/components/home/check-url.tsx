@@ -40,12 +40,10 @@ interface UrlAssessmentResponse {
 // URL validation function
 function isValidHttpUrl(url: string): boolean {
   if (!url || typeof url !== "string") return false;
-  try {
-    const urlObj = new URL(url);
-    return urlObj.protocol === "http:" || urlObj.protocol === "https:";
-  } catch {
-    return false;
-  }
+
+  const urlRegex = /^https?:\/\/.*?\..+/i;
+
+  return urlRegex.test(url);
 }
 
 export default function CheckUrlStatus() {
@@ -60,7 +58,7 @@ export default function CheckUrlStatus() {
       return;
     }
     if (!isValidHttpUrl(url.trim())) {
-      setError("Please enter a valid URL starting with http:// or https://");
+      setError("Please enter a valid URL");
       return;
     }
     setIsLoading(true);
