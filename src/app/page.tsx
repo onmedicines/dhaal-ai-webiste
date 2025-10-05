@@ -6,9 +6,10 @@ import ProtectionSection from "@/components/home/protection";
 import CTASection from "@/components/home/cta";
 import HomePageHeader from "@/components/home/home-page-header";
 import Footer from "@/components/global/footer";
-import ImageDeepfakeChecker from "@/components/home/check-deepfake";
-import CheckUrl from "@/components/home/check-url";
-import CheckEmailStatus from "@/components/home/check-email";
+import TabComponent from "@/components/home/tab-component";
+// import ImageDeepfakeChecker from "@/components/home/check-deepfake";
+// import CheckUrl from "@/components/home/check-url";
+// import CheckEmailStatus from "@/components/home/check-email";
 
 export default function Home() {
   return (
@@ -17,9 +18,12 @@ export default function Home() {
         <HomePageHeader />
         <HeroSection />
         <AboutDeepfake />
-        <ImageDeepfakeChecker />
+
+        <TabComponent />
+
+        {/* <ImageDeepfakeChecker />
         <CheckUrl />
-        <CheckEmailStatus />
+        <CheckEmailStatus /> */}
         <ThreatCarousel />
         <RealCasesSection />
         <ProtectionSection />
