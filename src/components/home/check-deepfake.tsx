@@ -202,7 +202,7 @@ const ImageDeepfakeChecker: React.FC = () => {
 
   return (
     <section className="w-full flex items-center justify-center bg-background">
-      <div className="w-3/4 max-w-6xl p-6">
+      <div className="w-3/4 max-w-6xl p-6 pt-10">
         {/* Heading */}
         <div className="text-center mb-8">
           <p className="text-muted-foreground mx-auto text-lg">
