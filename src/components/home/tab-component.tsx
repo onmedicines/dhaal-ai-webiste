@@ -23,19 +23,19 @@ const YourComponent: React.FC = () => {
         <TabsList className="grid w-full grid-cols-3 mb-4">
           <TabsTrigger
             value="email"
-            className="data-[state=active]:outline-3 data-[state=active]:bg-zinc-900 m-2 mx-4 rounded-lg px-4 py-2"
+            className="data-[state=active]:outline-3 m-2 mx-4 rounded-lg px-4 py-2"
           >
             Check Email
           </TabsTrigger>
           <TabsTrigger
             value="url"
-            className="data-[state=active]:outline-3 data-[state=active]:bg-zinc-900 my-2 mx-4 rounded-lg px-4 py-2"
+            className="data-[state=active]:outline-3 my-2 mx-4 rounded-lg px-4 py-2"
           >
             Check URL
           </TabsTrigger>
           <TabsTrigger
             value="deepfake"
-            className="data-[state=active]:outline-3 data-[state=active]:bg-zinc-900 m-2 mx-4 rounded-lg px-4 py-2"
+            className="data-[state=active]:outline-3 m-2 mx-4 rounded-lg px-4 py-2"
           >
             Deepfake Detection
           </TabsTrigger>
